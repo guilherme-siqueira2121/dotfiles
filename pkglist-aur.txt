@@ -1,0 +1,7 @@
+catppuccin-gtk-theme-mocha
+intellij-idea-ultimate-edition
+pnpm-bin
+waypaper
+yay
+yay-debug
+zen-browser-bin

@@ -1,0 +1,188 @@
+/* Import colors */
+@import url("colors.css");
+
+/* Base Config */
+* {
+  font-family: "Dank Mono", "JetBrainsMono NFP", monospace;
+  font-style: normal;
+}
+
+/* Notification */
+.notification {
+  background: @surface;
+  color: @on_surface;
+  border: 2px solid @outline;
+  border-radius: 12px;
+  padding: 12px;
+  margin: 6px 0;
+}
+
+.summary {
+  font-size: 15px;
+  font-weight: 700;
+  color: @primary;
+  margin-bottom: 4px;
+}
+
+.body {
+  font-size: 13px;
+  color: @on_surface;
+  opacity: 0.9;
+}
+
+.time {
+  font-size: 12px;
+  font-weight: 500;
+  color: @secondary;
+  margin-right: 10px;
+}
+
+.close-button {
+  background: @error;
+  color: @on_surface;
+  border-radius: 6px;
+  padding: 2px 6px;
+  margin-top: 4px;
+}
+
+/* Notification progress bars */
+.notification.critical progress {
+  background: @error;
+}
+
+.notification.normal progress {
+  background: @primary;
+}
+
+.notification.low progress {
+  background: @secondary;
+}
+
+/* Control Center */
+.control-center {
+  background: @surface-alt;
+  border: 2px solid @outline;
+  border-radius: 14px;
+  padding: 12px;
+  color: @on_surface;
+}
+
+/* Group */
+.notification-group {
+  margin: 6px;
+  font-size: 13px;
+  color: @on_surface;
+}
+
+.notification-group-collapse-button,
+.notification-group-close-all-button {
+  background: @primary;
+  color: @surface;
+  border-radius: 6px;
+  padding: 4px 8px;
+}
+
+.notification-group-collapse-button:hover,
+.notification-group-close-all-button:hover {
+  background: @error;
+}
+
+/* Title */
+.widget-title {
+  color: @secondary;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.widget-title>button {
+  background: @surface-bright;
+  color: @on_surface;
+  border-radius: 6px;
+}
+
+.widget-title>button:hover {
+  background: @error;
+  color: @on_surface;
+}
+
+/* Buttons Grid */
+.widget-buttons-grid {
+  background: @surface-bright;
+  padding: 8px;
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+
+.widget-buttons-grid>flowbox>flowboxchild>button {
+  background: @surface;
+  color: @on_surface;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.widget-buttons-grid>flowbox>flowboxchild>button:hover {
+  background: alpha(@on_surface, 0.1);
+}
+
+.widget-buttons-grid>flowbox>flowboxchild>button.toggle:checked {
+  background: @secondary;
+  color: @surface;
+}
+
+/* Volume & Brightness */
+.widget-volume,
+.widget-backlight {
+  background: @surface-alt;
+  padding: 8px;
+  border-radius: 10px;
+  font-size: large;
+  margin: 8px 0;
+}
+
+/* Sliders */
+trough slider {
+  background: @outline;
+  border-radius: 6px;
+}
+
+trough slider:hover {
+  background: @primary;
+}
+
+trough highlight {
+  background: @volume;
+}
+
+/* Music Player */
+.widget-mpris {
+  background: @surface-alt;
+  border-radius: 10px;
+  padding: 6px;
+}
+
+.widget-mpris button {
+  background: transparent;
+  border-radius: 6px;
+}
+
+.widget-mpris button:hover {
+  background: @secondary;
+  color: @surface;
+}
+
+/* Do Not Disturb */
+.widget-dnd {
+  color: @on_surface;
+}
+
+.widget-dnd>switch {
+  background: @surface;
+  border-radius: 6px;
+}
+
+.widget-dnd>switch:checked {
+  background: @error;
+  border: 1px solid @error;
+}

@@ -1,0 +1,39 @@
+#!/bin/bash
+
+THEME_DIR="$HOME/dotfiles/config/kitty/themes"
+THEME_CONF="$HOME/.config/kitty/theme.conf"
+
+# Verifica fzf
+if ! command -v fzf >/dev/null 2>&1; then
+    echo "Erro: fzf não está instalado."
+    exit 1
+fi
+
+# Lista temas
+themes=$(ls "$THEME_DIR"/*.conf 2>/dev/null | xargs -n1 basename | sed 's/.conf$//')
+
+if [[ -z "$themes" ]]; then
+    echo "Nenhum tema encontrado em $THEME_DIR"
+    exit 1
+fi
+
+# Seleciona com preview
+selected_theme=$(
+    echo "$themes" |
+    fzf --prompt="Selecione um tema: " \
+        --preview "sed -n '1,200p' $THEME_DIR/{}.conf" \
+        --preview-window=right:50%
+)
+
+if [[ -z "$selected_theme" ]]; then
+    echo "Cancelado."
+    exit 0
+fi
+
+theme_file="$THEME_DIR/$selected_theme.conf"
+
+# Aplica tema
+cp "$theme_file" "$THEME_CONF"
+kitty @ set-colors --all "$theme_file" >/dev/null 2>&1
+
+echo "Tema aplicado: $selected_theme"

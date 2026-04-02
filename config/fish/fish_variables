@@ -1,0 +1,7 @@
+# This file contains fish universal variable definitions.
+# VERSION: 3.0
+SETUVAR --export XCURSOR_SIZE:16
+SETUVAR --export YDOTOOL_SOCKET:/tmp/\x2eydotool_socket
+SETUVAR __fish_initialized:4300
+SETUVAR fish_key_bindings:fish_default_key_bindings
+SETUVAR --export fish_user_paths:/home/user/\x2elocal/bin\x1e/home/user/dotfiles/bin\x1e/home/user/\x2efzf/bin
