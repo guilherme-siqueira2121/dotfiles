@@ -1,6 +1,0 @@
-"custom/wallpaper": {
-    "format": "",
-    "tooltip": "Trocar wallpaper",
-    "on-click": "/home/user/dotfiles/bin/wallpaper-menu.sh",
-    "on-click-right": "/home/user/dotfiles/bin/change-wall.sh"
-}

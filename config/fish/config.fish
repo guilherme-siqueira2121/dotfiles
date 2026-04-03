@@ -1,381 +1,95 @@
 # ============================================================================
-# FISH SHELL CONFIGURATION
+# ENVIRONMENT
 # ============================================================================
 
-# ============================================================================
-# ENVIRONMENT VARIABLES
-# ============================================================================
-
-# Editor
 set -gx EDITOR nvim
-
-# Wayland environment variables
 set -gx ELECTRON_OZONE_PLATFORM_HINT wayland
 set -gx GDK_BACKEND wayland
 set -gx QT_QPA_PLATFORM wayland
-
-# Kitty themes
-set -U fish_user_paths $HOME/dotfiles/bin $fish_user_paths
-
-# Cursor size
-set -Ux XCURSOR_SIZE 16
-
-# pnpm
+set -gx XCURSOR_SIZE 16
 set -gx PNPM_HOME "$HOME/.local/share/pnpm"
-if not string match -q -- $PNPM_HOME $PATH
-    set -gx PATH "$PNPM_HOME" $PATH
-end
 
-# Local binaries
-set -U fish_user_paths "$HOME/.local/bin" $fish_user_paths
+set -U fish_user_paths $HOME/dotfiles/bin $HOME/.local/bin $PNPM_HOME $fish_user_paths
 
 # ============================================================================
-# SHELL SETTINGS
+# SHELL
 # ============================================================================
 
-# Disable fish greeting
 set fish_greeting
-
-# Set default cursor style
 set fish_cursor_default beam
-
-# ============================================================================
-# INTERACTIVE SESSION SETUP
-# ============================================================================
-
-if status is-interactive
-    # Commands to run in interactive sessions can go here
-    
-    # Initialize Homebrew (if installed)
-    if test -f /home/linuxbrew/.linuxbrew/bin/brew
-        eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-    end
-    
-    # Initialize Starship prompt
-#     starship init fish | source
-    
-#     # Initialize zoxide (don't let it override cd - we handle that below)
-# #     zoxide init --cmd j fish | source
-    
-    # Display system info on startup
-#     kotofetch --border false
-end
 
 # ============================================================================
 # ALIASES
 # ============================================================================
 
-# File listing (eza)
-alias ll='eza --icons --group-directories-first'
-
-# File finder
+alias ll='eza --icons --group-directories-first -l'
 alias f='ff'
-alias finder='ff'
-
-# Zoxide
-alias z='cd'                        # Make z behave like our enhanced cd
-alias jump='zi'                     # Interactive jump
-# alias zls='zoxide query -l'        # List all directories in zoxide
-
-# Applications
-alias cursor="$HOME/Downloads/Cursor-1.5.11-x86_64.AppImage"
 
 # ============================================================================
 # FUNCTIONS
 # ============================================================================
 
-# ----------------------------------------------------------------------------
-# File Listing (eza wrapper)
-# ----------------------------------------------------------------------------
+# ls com eza
 function ls
     eza --icons --group-directories-first $argv
 end
 
-# ----------------------------------------------------------------------------
-# Yazi file manager with directory changing
-# ----------------------------------------------------------------------------
+# Yazi com troca de diretório
 function y
     set tmp (mktemp -t "yazi-cwd.XXXXXX")
     yazi $argv --cwd-file="$tmp"
-    
     if set cwd (command cat -- "$tmp"); and test -n "$cwd"; and test "$cwd" != "$PWD"
         builtin cd -- "$cwd"
     end
-    
     rm -f -- "$tmp"
 end
 
-# ----------------------------------------------------------------------------
-# Fuzzy File Finder (FZF)
-# ----------------------------------------------------------------------------
+# Fuzzy finder
 function ff
     set search_dir (test -n "$argv[1]"; and echo "$argv[1]"; or echo ".")
-    
-    # File extensions that should open in Neovim
+
     set code_extensions \
-        txt md markdown rst \
-        c cpp cc cxx h hpp hxx \
+        txt md markdown sh bash fish \
         js jsx ts tsx json jsonc \
-        py pyx pyi rb go rs java php \
-        html htm css scss sass less \
-        xml yaml yml toml ini conf config \
-        sh bash zsh fish vim lua sql \
-        r R pl pm swift kt scala clj hs elm \
-        ex exs erl f90 f95 f03 tex bib org \
-        dockerfile makefile log csv tsv \
-        proto graphql svelte vue dart nim zig \
-        crystal jl
-    
-    # Use fzf to select file/directory
+        py rb go rs lua vim \
+        html htm css scss \
+        yaml yml toml ini conf \
+        c cpp h hpp
+
     set selected (find $search_dir -type f -o -type d 2>/dev/null | \
         fzf --height=40% \
             --layout=reverse \
             --border \
-            --preview='if test -d {}; ls -la {}; else if test -f {}; head -50 {}; end; end' \
+            --preview='if test -d {}; eza --icons {}; else; head -50 {}; end' \
             --preview-window=right:50%:wrap \
-            --header="Enter: open, Tab: toggle preview" \
-            --bind="tab:toggle-preview")
-    
-    # Exit if nothing selected
-    if test -z "$selected"
-        return 0
-    end
-    
-    # Handle the selection
+            --header="Enter: abrir | Tab: preview")
+
+    test -z "$selected" && return 0
+
     if test -d "$selected"
-        # It's a directory - navigate to it
-        cd "$selected" && pwd
-        
+        cd "$selected"
     else if test -f "$selected"
-        # It's a file - check if it should open in Neovim
         set ext (string split -r -m1 . "$selected")[2]
-        set basename_file (basename "$selected")
-        
-        # Check if extension is in code_extensions or it's a common text file without extension
         if contains (string lower "$ext") $code_extensions
             nvim "$selected"
-            
-        else if test -z "$ext"
-            # Check for common files without extension
-            if echo "Makefile Dockerfile Rakefile Gemfile Procfile LICENSE README CHANGELOG TODO INSTALL" | grep -q "$basename_file"
-                nvim "$selected"
-            # Check if it's a text file
-            else if file "$selected" 2>/dev/null | grep -q text
-                nvim "$selected"
-            else
-                xdg-open "$selected" 2>/dev/null &
-            end
-            
         else
-            # Use xdg-open for other files (images, PDFs, etc.)
             xdg-open "$selected" 2>/dev/null &
         end
-        
-    else
-        echo "Error: Selected item doesn't exist or is not a regular file/directory"
-        return 1
-    end
-end
-
-# ----------------------------------------------------------------------------
-# Enhanced CD with Zoxide Integration
-# ----------------------------------------------------------------------------
-function cd
-    set argc (count $argv)
-    
-    # Handle no arguments - go to home
-    if test $argc -eq 0
-        builtin cd ~
-#         zoxide add (pwd)
-        return
-    end
-    
-    # Handle special cases
-    switch $argv[1]
-        case - "~" "." ".."
-            builtin cd $argv
-#             and zoxide add (pwd)
-            return
-            
-        case "/*"
-            # Absolute path - use normal cd
-            builtin cd $argv
-#             and zoxide add (pwd)
-            return
-    end
-    
-    # Check if it's a relative path that exists
-    if test -d "$argv[1]"
-        builtin cd $argv
-#         and zoxide add (pwd)
-        return
-    end
-    
-#     # Not a valid directory - try zoxide
-#     set matches (zoxide query -l -- $argv 2>/dev/null)
-    
-    if test (count $matches) -eq 0
-#         # No zoxide matches - try normal cd (will show error if invalid)
-        builtin cd $argv
-#         and zoxide add (pwd)
-        
-    else if test (count $matches) -eq 1
-        # Single match - go there
-        builtin cd "$matches[1]"
-#         and zoxide add (pwd)
-        
-    else
-        # Multiple matches - show picker
-        echo "Multiple directories found:"
-        set selected (printf '%s\n' $matches | fzf \
-            --height=40% \
-            --layout=reverse \
-            --border \
-            --header="Multiple matches for '$argv' - select one:" \
-            --preview='ls -la {}' \
-            --preview-window=right:50%:wrap)
-        
-        if test -n "$selected"
-            builtin cd "$selected"
-#             and zoxide add (pwd)
-        else
-            echo "No directory selected"
-            return 1
-        end
-    end
-end
-
-# ----------------------------------------------------------------------------
-# Zoxide Helper Functions
-# ----------------------------------------------------------------------------
-
-# # Interactive zoxide (enhanced)
-function zi
-    set selected (zoxide query -l | fzf \
-        --height=40% \
-        --layout=reverse \
-        --border \
-        --header="Select directory:" \
-        --preview='ls -la {}' \
-        --preview-window=right:50%:wrap \
-        --query="$argv")
-    
-    if test -n "$selected"
-        cd "$selected"
-    end
-end
-
-# # Add current directory to zoxide
-function za
-#     zoxide add (pwd)
-#     echo "Added (pwd) to zoxide database"
-end
-
-# # Remove directory from zoxide
-function zr
-    if test (count $argv) -eq 0
-        # Remove current directory
-#         zoxide remove (pwd)
-#         echo "Removed (pwd) from zoxide database"
-        
-    else
-        # Remove specified directory
-#         set matches (zoxide query -l -- $argv)
-        
-        if test (count $matches) -eq 1
-#             zoxide remove "$matches[1]"
-#             echo "Removed $matches[1] from zoxide database"
-            
-        else if test (count $matches) -gt 1
-            set selected (printf '%s\n' $matches | fzf \
-                --height=40% \
-                --layout=reverse \
-                --border \
-                --header="Select directory to remove:")
-            
-            if test -n "$selected"
-#                 zoxide remove "$selected"
-#                 echo "Removed $selected from zoxide database"
-            end
-            
-        else
-#             echo "zoxide: no match found"
-        end
-    end
-end
-
-# # Edit/browse zoxide database
-function ze
-#     zoxide query -l -s | fzf \
-        --height=60% \
-        --layout=reverse \
-        --border \
-        --header="Zoxide database (score | path) - Enter to jump, Ctrl-D to delete" \
-        --preview='ls -la {2}' \
-        --preview-window=right:50%:wrap \
-#         --bind="ctrl-d:execute(zoxide remove {2})+reload(zoxide query -l -s)" \
-        --with-nth=2.. \
-        --delimiter=' ' | read -l selected_line
-    
-    if test -n "$selected_line"
-        set path (echo "$selected_line" | awk '{print $2}')
-        cd "$path"
-    end
-end
-
-# # Original cd behavior (bypass zoxide)
-function ocd
-    builtin cd $argv
-end
-
-# # Force zoxide search (even if local directory exists)
-function zcd
-#     set matches (zoxide query -l -- $argv 2>/dev/null)
-    
-    if test (count $matches) -eq 0
-#         echo "No matches found in zoxide database"
-        return 1
-        
-    else if test (count $matches) -eq 1
-        builtin cd "$matches[1]"
-#         and zoxide add (pwd)
-        
-    else
-        set selected (printf '%s\n' $matches | fzf \
-            --height=40% \
-            --layout=reverse \
-            --border \
-            --header="Zoxide matches for '$argv':" \
-            --preview='ls -la {}' \
-            --preview-window=right:50%:wrap)
-        
-        if test -n "$selected"
-            builtin cd "$selected"
-#             and zoxide add (pwd)
-        end
     end
 end
 
 # ============================================================================
-# KEY BINDINGS
+# KEYBINDINGS
 # ============================================================================
 
-# Bind Ctrl+T to fuzzy file finder
 bind \cf 'ff; commandline -f repaint'
 
 # ============================================================================
-# END OF CONFIGURATION
+# PROMPT
 # ============================================================================
 
-# ============================================================================
-# CUSTOM PROMPT
-# ============================================================================
-
-# 󰣇 Arch Linux Custom Prompt
 function fish_prompt
     set -l last_status $status
-
-    # Colors
     set -l cyan (set_color cyan)
     set -l green (set_color green)
     set -l blue (set_color blue)
@@ -384,20 +98,98 @@ function fish_prompt
     set -l normal (set_color normal)
     set -l bold (set_color --bold)
 
-    # User@hostname with Arch icon
     echo -n $cyan$bold"󰣇 "$USER$normal
     echo -n "@"
     echo -n $green(prompt_hostname)$normal
     echo -n " "
-
-    # Current directory
     echo -n $blue(prompt_pwd)$normal
 
-    # Error indicator (show exit code if non-zero)
     if test $last_status -ne 0
         echo -n $red" [$last_status]"$normal
     end
 
-    # Prompt symbol
     echo -n $magenta" > "$normal
 end
+```
+
+---
+
+### `config/kitty/kitty.conf`
+```
+# Fonte
+font_family      JetBrains Mono Nerd Font
+bold_font        auto
+italic_font      auto
+bold_italic_font auto
+font_size        12.0
+
+# Cursor
+cursor_shape beam
+cursor_blink_interval 0.6
+
+# Janela
+window_padding_width 10
+background_opacity 1.0
+remember_window_size yes
+initial_window_width 120
+initial_window_height 32
+
+# Performance
+repaint_delay 10
+input_delay 1
+sync_to_monitor yes
+enable_audio_bell no
+
+# Scrollback
+scrollback_lines 10000
+
+# Shell
+shell /bin/fish
+
+# Atalhos
+map ctrl+shift+v paste_from_clipboard
+map ctrl+shift+c copy_to_clipboard
+map ctrl+shift+t new_tab
+map ctrl+shift+w close_tab
+map ctrl+shift+right next_tab
+map ctrl+shift+left previous_tab
+map ctrl+shift+enter new_window
+map ctrl+shift+j next_window
+map ctrl+shift+k previous_window
+
+term xterm-kitty
+
+# Tema Gruvbox Dark
+foreground #d4be98
+background #000000
+background_opacity 1
+
+cursor #d5c4a1
+selection_foreground #fbf1c7
+selection_background #3a3a3a
+
+tab_bar_style powerline
+active_tab_background #2c2c2c
+active_tab_foreground #ebdbb2
+inactive_tab_background #1a1a1a
+inactive_tab_foreground #665c54
+
+active_border_color #fabd2f
+inactive_border_color #3c3836
+
+color0  #0f0f0f
+color1  #aa2222
+color2  #78823c
+color3  #a67c21
+color4  #3a5a78
+color5  #8e5d78
+color6  #5c7f6a
+color7  #928374
+color8  #3c3836
+color9  #bb4444
+color10 #9bbc46
+color11 #cfa935
+color12 #689cb5
+color13 #b07090
+color14 #78b29c
+color15 #ebdbb2
