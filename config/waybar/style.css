@@ -35,7 +35,7 @@
   min-height: 24px;
   padding: 2px 4px;
   background-color: transparent;
-  background-image: url("/home/user/dotfiles/config/waybar/icons/ghostColor.svg");
+  background-image: url("/home/user/dotfiles/config/waybar/icons/ghost.svg");
   background-size: 13px 13px;
   background-repeat: no-repeat;
   background-position: center;
@@ -46,10 +46,10 @@
 }
 
 #workspaces button.active {
-  background-image: url("/home/user/dotfiles/config/waybar/icons/pacmanColor.svg");
+  background-image: url("/home/user/dotfiles/config/waybar/icons/pacman-1.svg");
   background-size: 15px 15px;
   opacity: 1;
-  animation: pacman-chomp 0.55s ease-in-out infinite;
+  animation: pacman-chomp 0.5s steps(5) infinite;
 }
 
 #workspaces button:hover:not(.active) {
@@ -59,13 +59,15 @@
 }
 
 @keyframes pacman-chomp {
-  0%   { opacity: 1.0; }
-  11%  { opacity: 1.0; }
-  22%  { opacity: 0.35; }
-  44%  { opacity: 1.0; }
-  66%  { opacity: 0.35; }
-  88%  { opacity: 1.0; }
-  100% { opacity: 1.0; }
+  0%   { background-image: url("/home/user/dotfiles/config/waybar/icons/pacman-1.svg"); }
+  10%  { background-image: url("/home/user/dotfiles/config/waybar/icons/pacman-2.svg"); }
+  20%  { background-image: url("/home/user/dotfiles/config/waybar/icons/pacman-3.svg"); }
+  30%  { background-image: url("/home/user/dotfiles/config/waybar/icons/pacman-4.svg"); }
+  50% { background-image: url("/home/user/dotfiles/config/waybar/icons/pacman-5.svg"); }
+  70% { background-image: url("/home/user/dotfiles/config/waybar/icons/pacman-4.svg"); }
+  80% { background-image: url("/home/user/dotfiles/config/waybar/icons/pacman-3.svg"); }
+  90% { background-image: url("/home/user/dotfiles/config/waybar/icons/pacman-2.svg"); }
+  100% { background-image: url("/home/user/dotfiles/config/waybar/icons/pacman-1.svg"); }
 }
 
 #clock {
