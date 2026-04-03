@@ -6,7 +6,8 @@
 
   "modules-left": [
     "hyprland/workspaces",
-    "cpu"
+    "cpu",
+    "pacman"
   ],
   "modules-center": ["clock"],
   "modules-right": [
@@ -21,9 +22,14 @@
   "hyprland/workspaces": {
     "format": "{icon}",
     "format-icons": {
-      "active": "●",
+      "active": "ᗧ",
       "default": "○"
-    }
+    },
+    "persistent-workspaces": {
+      "*": 5
+    },
+    "sort-by-number": true,
+    "on-click": "activate"
   },
 
   "clock": {
