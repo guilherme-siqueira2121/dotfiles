@@ -23,7 +23,7 @@
     "format": "{icon}",
     "format-icons": {
       "active": "ᗧ",
-      "default": "○"
+      "default": "ᗣ"
     },
     "persistent-workspaces": {
       "*": 5
