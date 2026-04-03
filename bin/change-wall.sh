@@ -15,9 +15,14 @@ if [ -z "$RANDOM_WALL" ]; then
     exit 1
 fi
 
+if ! pgrep -x awww-daemon > /dev/null; then
+    awww-daemon &
+    sleep 0.5
+fi
+
 cp "$RANDOM_WALL" "$CURRENT"
 
-swww img "$RANDOM_WALL" \
+awww img "$RANDOM_WALL" \
     --transition-fps 60 \
     --transition-type wipe \
     --transition-duration 2
