@@ -6,18 +6,10 @@
 
   "modules-left": [
     "hyprland/workspaces",
-    "cpu",
-    "pacman"
+    "cpu"
   ],
   "modules-center": ["clock"],
-  "modules-right": [
-    "bluetooth",
-    "network",
-    "pulseaudio",
-    "backlight",
-    "battery",
-    "custom/power"
-  ],
+  "modules-right": [],
 
   "hyprland/workspaces": {
     "format": "{icon}",
@@ -42,55 +34,5 @@
     "interval": 2,
     "format": "  {usage}%",
     "on-click": "kitty -e btop"
-  },
-
-  "network": {
-    "format-wifi": "󰤢  {essid}",
-    "format-ethernet": "󰈀",
-    "format-disconnected": "󰤠",
-    "interval": 5,
-    "tooltip-format": "{essid} ({signalStrength}%)",
-    "on-click": "kitty -e nmtui"
-  },
-
-  "bluetooth": {
-    "format": "󰂲",
-    "format-on": "󰂯",
-    "format-connected": "󰂱  {device_alias}",
-    "on-click": "blueman-manager",
-    "tooltip-format-connected": "{device_enumerate}"
-  },
-
-  "pulseaudio": {
-    "format": "{icon}  {volume}%",
-    "format-muted": "󰝟  Mudo",
-    "format-icons": {
-      "default": ["󰕿", "󰖀", "󰕾"]
-    },
-    "on-click": "pamixer -t",
-    "on-click-right": "pavucontrol",
-    "on-scroll-up": "pamixer -i 5",
-    "on-scroll-down": "pamixer -d 5"
-  },
-
-  "backlight": {
-    "format": "{icon}  {percent}%",
-    "format-icons": ["󱩎", "󱩏", "󱩐", "󱩑", "󱩒", "󱩓", "󱩔"],
-    "tooltip": false
-  },
-
-  "battery": {
-    "interval": 30,
-    "states": { "warning": 30, "critical": 15 },
-    "format": "{icon}  {capacity}%",
-    "format-charging": "󰂄  {capacity}%",
-    "format-plugged": "󰚥  {capacity}%",
-    "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
-  },
-
-  "custom/power": {
-    "format": "⏻",
-    "tooltip": false,
-    "on-click": "poweroff"
   }
 }

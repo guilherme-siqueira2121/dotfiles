@@ -53,10 +53,10 @@
 }
 
 @keyframes pacman-chomp {
-  0%   { background-image: url("/home/user/dotfiles/config/waybar/icons/pacman-1.svg"); }
-  10%  { background-image: url("/home/user/dotfiles/config/waybar/icons/pacman-2.svg"); }
-  20%  { background-image: url("/home/user/dotfiles/config/waybar/icons/pacman-3.svg"); }
-  30%  { background-image: url("/home/user/dotfiles/config/waybar/icons/pacman-4.svg"); }
+  0% { background-image: url("/home/user/dotfiles/config/waybar/icons/pacman-1.svg"); }
+  10% { background-image: url("/home/user/dotfiles/config/waybar/icons/pacman-2.svg"); }
+  20% { background-image: url("/home/user/dotfiles/config/waybar/icons/pacman-3.svg"); }
+  30% { background-image: url("/home/user/dotfiles/config/waybar/icons/pacman-4.svg"); }
   50% { background-image: url("/home/user/dotfiles/config/waybar/icons/pacman-5.svg"); }
   70% { background-image: url("/home/user/dotfiles/config/waybar/icons/pacman-4.svg"); }
   80% { background-image: url("/home/user/dotfiles/config/waybar/icons/pacman-3.svg"); }
@@ -70,14 +70,44 @@
   box-shadow: 0 0 0 1px rgba(122,156,198,0.15);
 }
 
+#bluetooth,
+#network,
+#pulseaudio,
+#backlight,
+#battery,
+#custom-power {
+  background-color: #0d0f1a;
+  border-radius: 6px;
+  margin: 3px 4px;
+  padding: 6px 10px;
+  min-width: 0;
+  border-radius: 12px;
+  transition:
+    max-width 0.25s ease,
+    opacity   0.20s ease,
+    background-color 0.15s ease;
+}
+
+#bluetooth:hover,
+#network:hover,
+#pulseaudio:hover,
+#backlight:hover,
+#battery:hover,
+#custom-power:hover {
+  opacity: 1;
+  background-color: #161830;
+}
+
 #battery.warning  { color: #e5a55a; }
 #battery.critical { color: #d88888; }
 #battery.charging { color: #89c9a6; }
 
 #network.disconnected { color: #d88888; }
 
-#bluetooth           { color: #666; }
+#bluetooth           { color: #555570; }
 #bluetooth.connected { color: #8fb3d9; }
+
+#pulseaudio.muted { color: #555570; }
 
 tooltip {
   background-color: #0d0f1a;
