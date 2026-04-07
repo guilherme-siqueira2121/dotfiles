@@ -1,21 +1,17 @@
 import QtQuick
 import Quickshell
 
-Item {
-    id: root
-
-    property string format: "hh:mm:ss - yyyy-MM-dd"
+Text {
+    property string format: "hh:mm  ddd, dd MMM"
 
     SystemClock {
         id: clock
-        precision: SystemClock.Seconds
+        precision: SystemClock.Minutes
     }
 
-    Text {
-        anchors.centerIn: parent
-        color: "#cdd6f4"
-        font.pixelSize: 14
-
-        text: Qt.formatDateTime(clock.date, root.format)
-    }
+    text: Qt.formatDateTime(clock.date, format)
+    color: "#8fb3d9"
+    font.family: "JetBrains Mono Nerd Font"
+    font.pixelSize: 13
+    font.weight: Font.Medium
 }
