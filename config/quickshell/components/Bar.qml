@@ -15,7 +15,7 @@ PanelWindow {
     Rectangle {
         anchors.fill: parent
         anchors.margins: 4
-        color: "#0d0f1a"
+        color: "#dbdeef"
         radius: 18
 
         Workspaces {
