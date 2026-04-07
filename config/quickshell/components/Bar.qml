@@ -1,5 +1,4 @@
 import QtQuick
-import QtQuick.Layouts
 import Quickshell
 import Quickshell.Wayland
 
@@ -19,23 +18,14 @@ PanelWindow {
         color: "#0d0f1a"
         radius: 18
 
-        RowLayout {
-            anchors.fill: parent
+        Workspaces {
+            anchors.left: parent.left
             anchors.leftMargin: 12
-            anchors.rightMargin: 12
-            spacing: 8
+            anchors.verticalCenter: parent.verticalCenter
+        }
 
-            Item {
-                Layout.fillWidth: true
-            }
-
-            ClockText {
-                Layout.alignment: Qt.AlignVCenter
-            }
-
-            Item {
-                Layout.fillWidth: true
-            }
+        ClockText {
+            anchors.centerIn: parent
         }
     }
 }
