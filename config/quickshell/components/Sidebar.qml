@@ -17,5 +17,13 @@ PanelWindow {
         anchors.margins: 4
         color: "#0d0f1a"
         radius: 12
+
+        Column {
+            anchors.centerIn: parent
+            spacing: 16
+
+            WifiIcon {}
+            BluetoothIcon {}
+        }
     }
 }
