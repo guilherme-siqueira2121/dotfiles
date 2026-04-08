@@ -9,8 +9,8 @@ Text {
         id: proc
         command: ["bash", "-c",
             "bluetoothctl show | grep -q 'Powered: yes' && " +
-            "bluetoothctl info 2>/dev/null | grep -q 'Connected: yes' " +
-            "&& echo 'connected' || echo 'on' || echo 'off'"]
+            "{ bluetoothctl info 2>/dev/null | grep -q 'Connected: yes' && echo connected || echo on; } " +
+            "|| echo off"]
         running: true
         stdout: StdioCollector {
             onStreamFinished: status = text.trim()
