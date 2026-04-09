@@ -32,7 +32,7 @@ Text {
     }
 
     text: muted ? "󰝟" : level < 30 ? "󰕿" : level < 70 ? "󰖀" : "󰕾"
-    color: muted ? "#555570" : "#b8c5db"
+    color: muted ? "#8888aa" : "#8fb3d9"
     font.pixelSize: 16
     font.family: "JetBrains Mono Nerd Font"
 }

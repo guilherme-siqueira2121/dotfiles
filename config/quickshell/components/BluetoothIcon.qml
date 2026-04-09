@@ -25,7 +25,7 @@ Text {
     }
 
     text: status === "connected" ? "󰂱" : status === "on" ? "󰂯" : "󰂲"
-    color: status === "connected" ? "#8fb3d9" : "#555570"
+    color: status === "connected" ? "#8fb3d9" : status === "on" ? "#a0a8d0" : "#8888aa"
     font.pixelSize: 16
     font.family: "JetBrains Mono Nerd Font"
 }

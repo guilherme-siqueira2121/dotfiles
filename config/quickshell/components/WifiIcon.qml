@@ -22,7 +22,7 @@ Text {
     }
 
     text: ssid === "" ? "󰤠" : "󰤢"
-    color: ssid === "" ? "#d88888" : "#8fb3d9"
+    color: ssid === "" ? "#c49ea0" : "#8fb3d9"
     font.pixelSize: 16
     font.family: "JetBrains Mono Nerd Font"
 }
