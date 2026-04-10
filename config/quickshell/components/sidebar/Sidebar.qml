@@ -5,8 +5,8 @@ import "../../services"
 
 PanelWindow {
     anchors {
-        left:   true
-        top:    true
+        left: true
+        top: true
         bottom: true
     }
 
@@ -15,15 +15,19 @@ PanelWindow {
 
     Rectangle {
         anchors {
-            fill:         parent
-            topMargin:    8
+            fill: parent
+            topMargin: 8
             bottomMargin: 8
-            leftMargin:   6
+            leftMargin: 6
         }
 
-        color:        Theme.bg
-        radius:       Theme.radius
+        color: Theme.bg
+        radius: Theme.radius
         border.color: Theme.border
         border.width: 1
+
+        Workspaces {
+            anchors.centerIn: parent
+        }
     }
 }
