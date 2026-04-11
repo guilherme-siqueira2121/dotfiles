@@ -23,8 +23,24 @@ PanelWindow {
         border.color: Theme.border
         border.width: 1
 
-        Workspaces {
-            anchors.centerIn: parent
+        Column {
+            anchors {
+                top: parent
+                topMargin: 12
+                horizontalCenter: parent.horizontalCenter
+            }
+
+            Workspaces {}
+        }
+
+        Column {
+            anchors {
+                bottom: parent.bottom
+                bottomMargin: 12
+                horizontalCenter: parent.horizontalCenter
+            }
+            
+            spacing: 8
         }
     }
 }
