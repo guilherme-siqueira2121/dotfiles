@@ -5,7 +5,7 @@ import Quickshell
 Singleton {
     readonly property color bg: "#0d0f1a"
     readonly property color surface: "#13162b"
-    readonly property color border: "#ffffff10"
+    readonly property color border: "#4a5068"
     readonly property color text: "#cdd6f4"
     readonly property color muted: "#4a5068"
     readonly property color accent: "#8fb3d9"

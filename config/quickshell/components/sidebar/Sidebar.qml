@@ -16,13 +16,10 @@ PanelWindow {
     Rectangle {
         anchors {
             fill: parent
-            topMargin: 8
-            bottomMargin: 8
-            leftMargin: 6
         }
 
         color: Theme.bg
-        radius: Theme.radius
+        radius: 0
         border.color: Theme.border
         border.width: 1
 
