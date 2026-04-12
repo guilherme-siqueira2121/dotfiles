@@ -40,6 +40,8 @@ PanelWindow {
                 horizontalCenter: parent.horizontalCenter
             }
             
+            VolumeIcon {}
+
             spacing: 8
         }
     }
