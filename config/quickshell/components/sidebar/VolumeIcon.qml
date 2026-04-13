@@ -40,7 +40,7 @@ Item {
 
     Text {
         anchors.centerIn: parent
-        font.family: "JetBrain Mono Nerd Font"
+        font.family: "JetBrains Mono Nerd Font"
         font.pixelSize: 14
         color: muted ? Theme.muted : Theme.accent
         text: muted ? "󰝟" : level < 30 ? "󰕿" : level < 70 ? "󰖀" : "󰕾"
