@@ -39,10 +39,11 @@ PanelWindow {
                 bottomMargin: 12
                 horizontalCenter: parent.horizontalCenter
             }
-            
-            VolumeIcon {}
 
             spacing: 8
+            
+            WifiIcon {}
+            VolumeIcon {}
         }
     }
 }
