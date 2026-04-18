@@ -44,6 +44,7 @@ PanelWindow {
             
             WifiIcon {}
             VolumeIcon {}
+            BatteryIcon {}
         }
     }
 }
