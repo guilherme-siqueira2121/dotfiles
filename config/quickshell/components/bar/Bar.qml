@@ -11,6 +11,7 @@ PanelWindow {
     }
 
     implicitHeight: 36
+    exclusionMode: ExclusionMode.Ignore
     color: "transparent"
 
     HoverHandler {
@@ -18,20 +19,22 @@ PanelWindow {
     }
 
     Rectangle {
-        anchors.fill: parent
+        anchors.centerIn: parent
+        width: clockItem.implicitWidth + 32
+        height: 30
         color: Theme.bg
+        radius: Theme.radius
         border.color: Theme.border
         border.width: 1
 
         opacity: hover.hovered ? 1.0 : 0.0
 
         Behavior on opacity {
-            NumberAnimation {
-                duration: Theme.animNormal
-            }
+            NumberAnimation { duration: Theme.animNormal }
         }
 
         Clock {
+            id: clockItem
             anchors.centerIn: parent
         }
     }
