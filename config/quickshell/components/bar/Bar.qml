@@ -31,12 +31,8 @@ PanelWindow {
             }
         }
 
-        Text {
+        Clock {
             anchors.centerIn: parent
-            color: Theme.text
-            font.pixelSize: 13
-            font.family: "JetBrains Mono Nerd Font"
-            text: "bar"
         }
     }
 }
