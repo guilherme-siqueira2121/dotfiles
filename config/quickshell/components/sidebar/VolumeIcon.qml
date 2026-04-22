@@ -4,11 +4,21 @@ import Quickshell.Io
 import "../../services"
 
 Item {
+    id: root
     width: 28
     height: 28
 
     property int level: 0
     property bool muted: false
+
+    VolumePopup {
+        id: popup
+        visible: false
+        anchor.window: root.QsWindow.window
+        anchor.rect: Qt.rect(root.x, root.y, root.width, root.height)
+        anchor.edges: Edges.Right
+        anchor.gravity: Edges.Right
+    }
 
     Process {
         id: volProc
@@ -24,7 +34,7 @@ Item {
         command: ["bash", "-c", "pamixer --get-mute 2>/dev/null || echo false"]
         running: true
         stdout: StdioCollector {
-            onStreamFinished: muted= text.trim() === "true"
+            onStreamFinished: { muted = text.trim() === "true" }
         }
     }
 
@@ -44,5 +54,9 @@ Item {
         font.pixelSize: 14
         color: muted ? Theme.muted : Theme.accent
         text: muted ? "󰝟" : level < 30 ? "󰕿" : level < 70 ? "󰖀" : "󰕾"
+    }
+
+    TapHandler {
+        onTapped: popup.visible = !popup.visible
     }
 }

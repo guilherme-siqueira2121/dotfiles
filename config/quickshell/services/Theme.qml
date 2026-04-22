@@ -10,7 +10,7 @@ Singleton {
     readonly property color muted: "#4a5068"
     readonly property color accent: "#8fb3d9"
 
-    readonly property int sidebarWidth: 44
+    readonly property int sidebarWidth: 54
     readonly property int radius: 12
     readonly property int spacing: 8
     readonly property int animFast: 150
