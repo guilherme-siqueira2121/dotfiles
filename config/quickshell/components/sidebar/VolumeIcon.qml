@@ -4,7 +4,6 @@ import Quickshell.Io
 import "../../services"
 
 Item {
-    id: root
     width: 28
     height: 28
 
@@ -14,10 +13,6 @@ Item {
     VolumePopup {
         id: popup
         visible: false
-        anchor.window: root.QsWindow.window
-        anchor.rect: Qt.rect(root.x, root.y, root.width, root.height)
-        anchor.edges: Edges.Right
-        anchor.gravity: Edges.Right
     }
 
     Process {

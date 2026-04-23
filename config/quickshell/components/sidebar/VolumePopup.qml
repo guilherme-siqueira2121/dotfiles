@@ -2,16 +2,22 @@ import QtQuick
 import QtQuick.Controls
 import Quickshell
 import Quickshell.Io
+import Quickshell.Wayland
 import "../../services"
 
-PopupWindow {
+PanelWindow {
     id: popup
 
     property int volume: 50
 
-    implicitWidth: 48
+    anchors.right: true
+    implicitWidth: 56
     implicitHeight: 160
+    margins.right: 10
     color: "transparent"
+
+    WlrLayershell.layer: WlrLayer.Overlay
+    WlrLayershell.exclusionMode: ExclusionMode.Ignore
 
     Rectangle {
         anchors.fill: parent
