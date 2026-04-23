@@ -3,7 +3,7 @@ import Quickshell
 import Quickshell.Hyprland
 
 Column {
-    spacing: 6
+    spacing: 12
 
     Repeater {
         model: Hyprland.workspaces

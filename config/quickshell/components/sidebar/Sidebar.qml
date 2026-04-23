@@ -40,7 +40,7 @@ PanelWindow {
                 horizontalCenter: parent.horizontalCenter
             }
 
-            spacing: 8
+            spacing: 16
             
             WifiIcon {}
             VolumeIcon {}
