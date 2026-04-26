@@ -1,9 +1,9 @@
 import QtQuick
 import Quickshell
-import "components/sidebar"
 import "components/bar"
+import "components/top"
 
 ShellRoot {
-    Sidebar {}
     Bar {}
+    Top {}
 }

@@ -5,37 +5,46 @@ import "../../services"
 
 PanelWindow {
     anchors {
-        top: true
         left: true
-        right: true
+        top: true
+        bottom: true
     }
 
-    implicitHeight: 36
-    exclusionMode: ExclusionMode.Ignore
+    implicitWidth: Theme.barWidth
     color: "transparent"
 
-    HoverHandler {
-        id: hover
-    }
-
     Rectangle {
-        anchors.centerIn: parent
-        width: clockItem.implicitWidth + 32
-        height: 30
+        anchors {
+            fill: parent
+        }
+
         color: Theme.bg
-        radius: Theme.radius
+        radius: 0
         border.color: Theme.border
         border.width: 1
 
-        opacity: hover.hovered ? 1.0 : 0.0
+        Column {
+            anchors {
+                top: parent
+                topMargin: 12
+                horizontalCenter: parent.horizontalCenter
+            }
 
-        Behavior on opacity {
-            NumberAnimation { duration: Theme.animNormal }
+            Workspaces {}
         }
 
-        Clock {
-            id: clockItem
-            anchors.centerIn: parent
+        Column {
+            anchors {
+                bottom: parent.bottom
+                bottomMargin: 12
+                horizontalCenter: parent.horizontalCenter
+            }
+
+            spacing: 16
+            
+            WifiIcon {}
+            VolumeIcon {}
+            BatteryIcon {}
         }
     }
 }
