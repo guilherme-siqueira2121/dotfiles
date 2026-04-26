@@ -64,5 +64,6 @@ PanelWindow {
     Process {
         id: setVol
         command: ["bash", "-c", "pamixer --set-volume " + volume]
+        running: false
     }
 }
