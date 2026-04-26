@@ -38,11 +38,25 @@ Item {
         }
     }
 
-    Text {
+    Rectangle {
         anchors.centerIn: parent
-        font.family: "JetBrains Mono Nerd Font"
-        font.pixelSize: 18
-        color: level <= 20 ? "#d88888" : Theme.accent
-        text: charging ? "󰂄" : level > 80 ? "󰁹" : level > 50 ? "󰂀" : level > 20 ? "󰁽" : "󰁺"
+        width: 28
+        height: 28
+        radius: 6
+        color: hover.hovered ? "#2727277c" : "transparent"
+
+        Behavior on color {
+            ColorAnimation { duration: Theme.animFast }
+        }
+
+        HoverHandler { id: hover }
+
+        Text {
+            anchors.centerIn: parent
+            font.family: "JetBrains Mono Nerd Font"
+            font.pixelSize: 18
+            color: level <= 20 ? "#d88888" : Theme.accent
+            text: charging ? "󰂄" : level > 80 ? "󰁹" : level > 50 ? "󰂀" : level > 20 ? "󰁽" : "󰁺"
+        }
     }
 }

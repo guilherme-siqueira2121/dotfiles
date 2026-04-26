@@ -25,11 +25,26 @@ Item {
         onTriggered: proc.running = true
     }
 
-    Text {
+    Rectangle {
+        anchors.centerIn: parent
+        width: 28
+        height: 28
+        radius: 6
+        color: hover.hovered ? "#2727277c" : "transparent"
+
+        Behavior on color {
+            ColorAnimation { duration: Theme.animFast }
+        }
+
+        HoverHandler { id: hover }
+      
+
+        Text {
         anchors.centerIn: parent
         font.family: "JetBrains Mono Nerd Font"
         font.pixelSize: 18
         color: ssid === "" ? Theme.muted : Theme.accent
         text: ssid === "" ? "󰤠" : "󰤢"
+        }
     }
 }
