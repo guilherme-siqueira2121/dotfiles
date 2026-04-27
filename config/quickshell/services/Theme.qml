@@ -10,7 +10,7 @@ Singleton {
     readonly property color muted: "#4a5068"
     readonly property color accent: "#8fb3d9"
 
-    readonly property int barBorder: 20
+    readonly property int barBorder: 14
     readonly property int barWidth: 54
     readonly property int radius: 12
     readonly property int spacing: 8
