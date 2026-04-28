@@ -12,7 +12,8 @@ Item {
 
     VolumePopup {
         id: popup
-        visible: false
+        visible: true
+        open: false
     }
 
     Process {
@@ -67,6 +68,6 @@ Item {
 
 
     TapHandler {
-        onTapped: popup.visible = !popup.visible
+        onTapped: popup.open = !popup.open
     }
 }

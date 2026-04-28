@@ -9,22 +9,32 @@ PanelWindow {
     id: popup
 
     property int volume: 50
+    property bool open: false
 
     anchors.right: true
     implicitWidth: 56
     implicitHeight: 160
-    margins.right: 10
+    margins.right: 4
     color: "transparent"
 
     WlrLayershell.layer: WlrLayer.Overlay
     WlrLayershell.exclusionMode: ExclusionMode.Ignore
 
     Rectangle {
-        anchors.fill: parent
+        id: panel
+        width: parent.width
+        height: parent.height
         color: Theme.bg
         radius: Theme.radius
-        border.color: Theme.border
-        border.width: 1
+
+        x: open ? 0 : width + 10
+
+        Behavior on x {
+            NumberAnimation {
+                duration: Theme.animNormal
+                easing.type: Easing.OutCubic
+            }
+        }
 
         Column {
             anchors.centerIn: parent
