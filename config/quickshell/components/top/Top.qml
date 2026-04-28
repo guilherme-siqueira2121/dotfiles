@@ -19,7 +19,7 @@ PanelWindow {
 
     Rectangle {
         anchors.centerIn: parent
-        width: clockText.implicitHeight + 32
+        width: clockText.implicitWidth + 32
         height: 30
         radius: Theme.radius
         color: Theme.bg
