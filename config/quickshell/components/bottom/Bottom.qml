@@ -5,11 +5,11 @@ import "../../services"
 
 PanelWindow {
     anchors {
-        right: true
-        top: true
         bottom: true
+        left: true
+        right: true
     }
 
-    implicitWidth: Theme.barBorder
+    implicitHeight: Theme.barBorder
     color: Theme.bg
 }

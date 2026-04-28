@@ -20,8 +20,6 @@ PanelWindow {
 
         color: Theme.bg
         radius: 0
-        border.color: Theme.border
-        border.width: 1
 
         Column {
             anchors {
