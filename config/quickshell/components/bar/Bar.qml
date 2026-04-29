@@ -1,48 +1,38 @@
 import QtQuick
 import Quickshell
-import Quickshell.Wayland
 import "../../services"
 
-PanelWindow {
+Rectangle {
     anchors {
-        left: true
-        top: true
-        bottom: true
+        top:    parent.top
+        bottom: parent.bottom
+        left:   parent.left
     }
 
-    implicitWidth: Theme.barWidth
-    color: "transparent"
+    width: Theme.barWidth
+    color: Theme.bg
 
-    Rectangle {
+    Column {
         anchors {
-            fill: parent
+            top:              parent.top
+            topMargin:        12
+            horizontalCenter: parent.horizontalCenter
         }
 
-        color: Theme.bg
-        radius: 0
+        Workspaces {}
+    }
 
-        Column {
-            anchors {
-                top: parent
-                topMargin: 12
-                horizontalCenter: parent.horizontalCenter
-            }
-
-            Workspaces {}
+    Column {
+        anchors {
+            bottom:           parent.bottom
+            bottomMargin:     12
+            horizontalCenter: parent.horizontalCenter
         }
 
-        Column {
-            anchors {
-                bottom: parent.bottom
-                bottomMargin: 12
-                horizontalCenter: parent.horizontalCenter
-            }
+        spacing: 16
 
-            spacing: 16
-            
-            WifiIcon {}
-            VolumeIcon {}
-            BatteryIcon {}
-        }
+        WifiIcon {}
+        VolumeIcon {}
+        BatteryIcon {}
     }
 }

@@ -1,13 +1,8 @@
 import QtQuick
 import Quickshell
-import "components/bar"
-import "components/top"
-import "components/right"
-import "components/bottom"
+import "components"
 
 ShellRoot {
-    Bar {}
-    Top {}
-    Right {}
-    Bottom {}
+    MainWindow {}
+    Exclusions {}
 }
