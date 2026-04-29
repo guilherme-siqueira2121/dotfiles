@@ -19,4 +19,15 @@ PanelWindow {
     Bar {
         id: bar
     }
+
+    Rectangle {
+        anchors {
+            top: parent.top
+            left: parent.left
+            right: parent.right
+        }
+
+        height: Theme.barBorder
+        color: Theme.bg
+    }
 }

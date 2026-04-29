@@ -4,9 +4,9 @@ import "../../services"
 
 Rectangle {
     anchors {
-        top:    parent.top
+        top: parent.top
         bottom: parent.bottom
-        left:   parent.left
+        left: parent.left
     }
 
     width: Theme.barWidth
@@ -14,8 +14,8 @@ Rectangle {
 
     Column {
         anchors {
-            top:              parent.top
-            topMargin:        12
+            top: parent.top
+            topMargin: 12
             horizontalCenter: parent.horizontalCenter
         }
 
@@ -24,8 +24,8 @@ Rectangle {
 
     Column {
         anchors {
-            bottom:           parent.bottom
-            bottomMargin:     12
+            bottom: parent.bottom
+            bottomMargin: 12
             horizontalCenter: parent.horizontalCenter
         }
 
