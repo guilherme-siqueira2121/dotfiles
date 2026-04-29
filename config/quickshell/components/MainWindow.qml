@@ -30,4 +30,15 @@ PanelWindow {
         height: Theme.barBorder
         color: Theme.bg
     }
+
+    Rectangle {
+    anchors {
+        top:    parent.top
+        bottom: parent.bottom
+        right:  parent.right
+    }
+
+    width: Theme.barBorder
+    color: Theme.bg
+    }
 }
