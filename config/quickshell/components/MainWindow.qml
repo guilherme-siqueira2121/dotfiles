@@ -1,7 +1,7 @@
 import QtQuick
 import Quickshell
 import Quickshell.Wayland
-import "bar"1
+import "bar"
 import "../services"
 
 PanelWindow {
