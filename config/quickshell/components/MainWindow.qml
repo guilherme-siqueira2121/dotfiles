@@ -16,6 +16,40 @@ PanelWindow {
     WlrLayershell.exclusionMode: ExclusionMode.Ignore
     WlrLayershell.layer: WlrLayer.Overlay
 
+    mask: Region {
+        Region {
+            x: 0
+            y: 0
+            width: Theme.barWidth
+            height: root.height
+            intersection: Intersection.Subtract
+        }
+
+        Region {
+            x: 0
+            y: 0
+            width: root.width
+            height: Theme.barBorder
+            intersection: Intersection.Subtract
+        }
+
+        Region {
+            x: root.width - Theme.barBorder
+            y: 0
+            width: Theme.barBorder
+            height: root.height
+            intersection: Intersection.Subtract
+        }
+
+        Region {
+            x: 0
+            y: root.height - Theme.barBorder
+            width: root.width
+            height: Theme.barBorder
+            intersection: Intersection.Subtract
+        }
+    }
+
     Bar {
         id: bar
     }
