@@ -10,12 +10,6 @@ Item {
     property int level: 0
     property bool muted: false
 
-    VolumePopup {
-        id: popup
-        visible: true
-        open: false
-    }
-
     Process {
         id: volProc
         command: ["bash", "-c", "pamixer --get-volume 2>/dev/null || echo 0"]

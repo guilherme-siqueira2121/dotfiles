@@ -19,9 +19,9 @@ Item {
         }
     }
 
-    anchors.rightMargin:  direction === "right"  ? (-width  - Theme.barBorder) * offsetScale : 0
-    anchors.leftMargin:   direction === "left"   ? (-width  - Theme.barBorder) * offsetScale : 0
-    anchors.topMargin:    direction === "top"    ? (-height - Theme.barBorder) * offsetScale : 0
+    anchors.rightMargin: direction === "right" ? (-width  - Theme.barBorder) * offsetScale : 0
+    anchors.leftMargin: direction === "left" ? (-width  - Theme.barBorder) * offsetScale : 0
+    anchors.topMargin: direction === "top" ? (-height - Theme.barBorder) * offsetScale : 0
     anchors.bottomMargin: direction === "bottom" ? (-height - Theme.barBorder) * offsetScale : 0
 
     opacity: 1 - offsetScale

@@ -2,6 +2,7 @@ import QtQuick
 import Quickshell
 import Quickshell.Wayland
 import "bar"
+import "top"
 import "../services"
 
 PanelWindow {
@@ -9,7 +10,7 @@ PanelWindow {
 
     anchors.top: true
     anchors.bottom: true
-    anchors.left:true
+    anchors.left: true
     anchors.right: true
 
     color: "transparent"
@@ -54,6 +55,10 @@ PanelWindow {
         id: bar
     }
 
+    ClockDrawer {
+        open: topBorder.hovered
+    }
+
     Rectangle {
         anchors {
             top: parent.top
@@ -67,9 +72,9 @@ PanelWindow {
 
     Rectangle {
     anchors {
-        top:    parent.top
+        top: parent.top
         bottom: parent.bottom
-        right:  parent.right
+        right: parent.right
     }
 
     width: Theme.barBorder
@@ -79,11 +84,25 @@ PanelWindow {
     Rectangle {
         anchors {
             bottom: parent.bottom
-            left:   parent.left
-            right:  parent.right
+            left: parent.left
+            right: parent.right
         }
 
         height: Theme.barBorder
-        color:  Theme.bg
+        color: Theme.bg
+    }
+
+    Rectangle {
+    id: topBorder
+    anchors {
+        top:   parent.top
+        left:  parent.left
+        right: parent.right
+    }
+    height: Theme.barBorder
+    color:  Theme.bg
+
+    HoverHandler { id: topHover }
+    property bool hovered: topHover.hovered
     }
 }
