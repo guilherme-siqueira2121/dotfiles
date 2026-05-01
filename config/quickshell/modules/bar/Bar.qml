@@ -12,4 +12,14 @@ Rectangle {
     color: Theme.bg
     border.color: Theme.border
     border.width: 1
+
+    Column {
+        anchors {
+            top: parent.top
+            topMargin: 16
+            horizontalCenter: parent.horizontalCenter
+        }
+
+        Workspaces {}
+    }
 }
