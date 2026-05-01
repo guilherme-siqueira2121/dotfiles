@@ -32,6 +32,7 @@ Rectangle {
 
         spacing: 16
 
+        WifiIcon {}
         BatteryIcon {}
     }
 }
