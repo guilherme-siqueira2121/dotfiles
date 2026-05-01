@@ -1,6 +1,7 @@
 import QtQuick
 import Quickshell
 import Quickshell.Wayland
+import "bar"
 
 PanelWindow {
     anchors.top: true
@@ -11,4 +12,6 @@ PanelWindow {
     color: "transparent"
     WlrLayershell.exclusionMode: ExclusionMode.Ignore
     WlrLayershell.layer: WlrLayer.Overlay
+
+    Bar {}
 }
