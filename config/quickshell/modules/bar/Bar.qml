@@ -22,4 +22,16 @@ Rectangle {
 
         Workspaces {}
     }
+
+    Column {
+        anchors {
+            bottom: parent.bottom
+            bottomMargin: 16
+            horizontalCenter: parent.horizontalCenter
+        }
+
+        spacing: 16
+
+        BatteryIcon {}
+    }
 }
