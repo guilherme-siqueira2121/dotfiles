@@ -3,17 +3,18 @@ import QtQuick
 import Quickshell
 
 Singleton {
-    readonly property color bg: "#0d0f1a"
-    readonly property color surface: "#13162b"
-    readonly property color border: "#4a5068"
-    readonly property color text: "#cdd6f4"
-    readonly property color muted: "#4a5068"
-    readonly property color accent: "#8fb3d9"
+    readonly property color bg:      "#f4f4f8"
+    readonly property color surface: "#ececf2"
+    readonly property color overlay: "#e2e2ea"
+    readonly property color text:    "#1a1a2e"
+    readonly property color subtext: "#5a5a7a"
+    readonly property color border:  "#c8c8da"
+    readonly property color accent:  "#6c63ff"
+    readonly property color muted:   "#a0a0b8"
 
+    readonly property int barWidth:  54
     readonly property int barBorder: 14
-    readonly property int barWidth: 54
-    readonly property int radius: 12
-    readonly property int spacing: 8
-    readonly property int animFast: 150
+    readonly property int radius:     12
+    readonly property int animFast:   150
     readonly property int animNormal: 250
 }

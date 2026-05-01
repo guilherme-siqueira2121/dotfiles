@@ -1,8 +1,7 @@
 import QtQuick
 import Quickshell
-import "components"
+import "modules"
 
 ShellRoot {
     MainWindow {}
-    Exclusions {}
 }
