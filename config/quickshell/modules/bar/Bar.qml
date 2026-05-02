@@ -33,6 +33,7 @@ Rectangle {
         spacing: 16
 
         WifiIcon {}
+        VolumeIcon {}
         BatteryIcon {}
     }
 }
