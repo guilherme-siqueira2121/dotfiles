@@ -2,10 +2,7 @@ import QtQuick
 import Quickshell.Io
 import "../../services"
 
-Item {
-    width: 28
-    height: 28
-
+BarIcon {
     property string ssid: ""
 
     Process {

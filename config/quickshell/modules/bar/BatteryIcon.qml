@@ -35,6 +35,7 @@ BarIcon {
     }
 
     Text {
+        anchors.centerIn: parent
         font.family: "JetBrains Mono Nerd Font"
         font.pixelSize: 16
         color: level <= 20 ? "#e06c75" : Theme.accent
