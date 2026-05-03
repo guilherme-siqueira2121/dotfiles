@@ -2,10 +2,7 @@ import QtQuick
 import Quickshell.Io
 import "../../services"
 
-Item {
-    width: 28
-    height: 28
-
+BarIcon {
     property int level: 100
     property bool charging: false
 
@@ -38,7 +35,6 @@ Item {
     }
 
     Text {
-        anchors.centerIn: parent
         font.family: "JetBrains Mono Nerd Font"
         font.pixelSize: 16
         color: level <= 20 ? "#e06c75" : Theme.accent
