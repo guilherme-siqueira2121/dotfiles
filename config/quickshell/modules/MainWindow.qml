@@ -16,11 +16,28 @@ PanelWindow {
     WlrLayershell.exclusionMode: ExclusionMode.Ignore
     WlrLayershell.layer: WlrLayer.Overlay
 
-    mask: Region {
-        item: bar
+    mask: Regions {
+        bar: bar
+        panels: panels
+        win: root
+    }
+
+    DrawerVisibilities {
+        id: visibilities
     }
 
     Bar {
         id: bar
+    }
+
+    Panels {
+        id: panels
+        visibilities: visibilities
+        bar: bar
+    }
+
+    Interactions {
+        visibilities: visibilities
+        bar: bar
     }
 }
