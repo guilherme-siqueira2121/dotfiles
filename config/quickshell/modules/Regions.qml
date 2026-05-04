@@ -16,10 +16,10 @@ Region {
     intersection: Intersection.Xor
 
     Region {
-        x: panels.clock.x + bar.implicitWidth
+        x: (panels.clock?.x ?? 0) + bar.implicitWidth
         y: 0
-        width: panels.clock.implicitWidth
-        height: panels.clock.implicitHeight * (1 - panels.clock.offsetScale) + Theme.barBorder
+        width: panels.clock?.implicitWidth ?? 0
+        height: (panels.clock?.implicitHeight ?? 0) * (1 - (panels.clock?.offsetScale ?? 1)) + Theme.barBorder
         intersection: Intersection.Subtract
     }
 }
