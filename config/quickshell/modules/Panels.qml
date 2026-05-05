@@ -1,5 +1,6 @@
 import QtQuick
 import "top"
+import "right"
 import "../services"
 
 Item {
@@ -7,6 +8,9 @@ Item {
 
     required property DrawerVisibilities visibilities
     required property Item bar
+
+    readonly property alias clock: clockDrawer
+    readonly property alias volume: volumeDrawer
 
     anchors.fill: parent
     anchors.leftMargin: bar.implicitWidth
@@ -19,5 +23,12 @@ Item {
         open: root.visibilities.clock
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
+    }
+
+    VolumeDrawer {
+        id: volumeDrawer
+        open: root.visibilities.volume
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.right: parent.right
     }
 }
