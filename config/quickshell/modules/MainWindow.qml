@@ -16,14 +16,17 @@ PanelWindow {
     WlrLayershell.exclusionMode: ExclusionMode.Ignore
     WlrLayershell.layer: WlrLayer.Overlay
 
-    mask: Regions {
-        bar: bar
-        panels: panels
-        win: root
-    }
+    mask: regions
 
     DrawerVisibilities {
         id: visibilities
+    }
+
+    Regions {
+        id: regions
+        bar: bar
+        panels: panels
+        win: root
     }
 
     Bar {
@@ -39,5 +42,6 @@ PanelWindow {
     Interactions {
         visibilities: visibilities
         bar: bar
+        panels: panels
     }
 }
