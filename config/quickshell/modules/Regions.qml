@@ -15,11 +15,27 @@ Region {
     height: win.height - Theme.barBorder * 2
     intersection: Intersection.Xor
 
-    Region {
-        x: (panels.clock?.x ?? 0) + bar.implicitWidth
+    R {
+        panel: panels.clock
         y: 0
-        width: panels.clock?.implicitWidth ?? 0
-        height: (panels.clock?.implicitHeight ?? 0) * (1 - (panels.clock?.offsetScale ?? 1)) + Theme.barBorder
+        height: panel.implicitHeight * (1 - panel.offsetScale) + Theme.barBorder
+    }
+
+    R {
+        panel: panels.volume
+        x: win.width - width
+        y: panel.y + Theme.barBorder
+        width: panel.implicitWidth * (1 - panel.offsetScale) + Theme.barBorder
+        height: panel.implicitHeight
+    }
+
+    component R: Region {
+        required property Item panel
+
+        x: panel.x + bar.implicitWidth
+        y: panel.y + Theme.barBorder
+        width: panel.implicitWidth
+        height: panel.implicitHeight
         intersection: Intersection.Subtract
     }
 }
