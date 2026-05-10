@@ -1,6 +1,6 @@
 import QtQuick
 import QtQuick.Controls
-import QtQuick.Io
+import Quickshell.Io
 import "../../services"
 
 Item {
@@ -11,7 +11,7 @@ Item {
 
     Process {
         id: getVol
-        comman: ["bash", "-c", "pamixer --get-volume 2>/dev/null || echo 50"]
+        command: ["bash", "-c", "pamixer --get-volume 2>/dev/null || echo 50"]
         running: true
         stdout: StdioCollector {
             onStreamFinished: level = parseInt(text.trim())
@@ -27,14 +27,14 @@ Item {
         interval: 2000
         running: true
         repeat: true
-        onTriggered: getVol.running: true
+        onTriggered: getVol.running = true
     }
 
     Slider {
         anchors.fill: parent
         orientation: Qt.Vertical
         value: level / 100
-        onMoved {
+        onMoved: {
             level = Math.round(value * 100)
             setVol.running = true
         }
