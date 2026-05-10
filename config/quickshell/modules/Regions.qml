@@ -22,7 +22,7 @@ Region {
     }
 
     R {
-        panel: panels.volume
+        panel: panels.osd
         x: win.width - width
         y: panel.y + Theme.barBorder
         width: panel.implicitWidth * (1 - panel.offsetScale) + Theme.barBorder

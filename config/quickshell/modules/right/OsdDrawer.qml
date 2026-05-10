@@ -1,6 +1,4 @@
 import QtQuick
-import QtQuick.Controls
-import Quickshell.Io
 import "../../services"
 
 Item {
@@ -8,10 +6,9 @@ Item {
 
     property bool open: false
     property real offsetScale: open ? 0 : 1
-    property int volume: 50
 
-    implicitWidth: 56
-    implicitHeight: 160
+    implicitWidth: 112
+    implicitHeight: 180
 
     visible: offsetScale < 1
 
@@ -24,20 +21,6 @@ Item {
 
     anchors.rightMargin: -implicitWidth * offsetScale
 
-    Process {
-        id: getVol
-        command: ["bash", "-c", "pamixer --get-volume 2>/dev/null || echo 50"]
-        running: true
-        stdout: StdioCollector {
-            onStreamFinished: volume = parseInt(text.trim())
-        }
-    }
-
-    Process {
-        id: setVol
-        command: ["bash", "-c", "pamixer --set-volume " + volume]
-    }
-
     Rectangle {
         anchors.fill: parent
         color: Theme.bg
@@ -45,27 +28,64 @@ Item {
         border.color: Theme.border
         border.width: 1
 
-        Column {
+        Row {
             anchors.centerIn: parent
             spacing: 8
 
-            Text {
-                anchors.horizontalCenter: parent.horizontalCenter
-                text: volume + "%"
-                color: Theme.text
-                font.pixelSize: 11
-                font.family: "JetBrains Mono Nerd Font"
+            Column {
+                anchors.verticalCenter: parent.verticalCenter
+                spacing: 8
+
+                Text {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    text: "󰕾"
+                    color: Theme.accent
+                    font.family: "JetBrains Mono Nerd Font"
+                    font.pixelSize: 14
+                }
+
+                VolumeSlider {
+                    id: volSlider
+                }
+
+                Text {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    text: volSlider.level + "%"
+                    color: Theme.subtext
+                    font.pixelSize: 10
+                    font.family: "JetBrains Mono Nerd Font"
+                }
             }
 
-            Slider {
-                id: slider
-                width: 28
+            Rectangle {
+                width: 1
                 height: 120
-                orientation: Qt.Vertical
-                value: volume / 100
-                onMoved: {
-                    volume = Math.round(value * 100)
-                    setVol.running = true
+                anchors.verticalCenter: parent.verticalCenter
+                color: Theme.border
+            }
+
+            Column {
+                anchors.verticalCenter: parent.verticalCenter
+                spacing: 8
+
+                Text {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    text: "󰃟"
+                    color: Theme.accent
+                    font.family: "JetBrains Mono Nerd Font"
+                    font.pixelSize: 14
+                }
+
+                BrightnessSlider {
+                    id: brightSlider
+                }
+
+                Text {
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    text: brightSlider.level + "%"
+                    color: Theme.subtext
+                    font.pixelSize: 10
+                    font.family: "JetBrains Mono Nerd Font"
                 }
             }
         }

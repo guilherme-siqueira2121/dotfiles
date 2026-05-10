@@ -10,7 +10,7 @@ Item {
     required property Item bar
 
     readonly property alias clock: clockDrawer
-    readonly property alias volume: volumeDrawer
+    readonly property alias osd: osdDrawer
 
     anchors.fill: parent
     anchors.leftMargin: bar.implicitWidth
@@ -25,9 +25,9 @@ Item {
         anchors.top: parent.top
     }
 
-    VolumeDrawer {
-        id: volumeDrawer
-        open: root.visibilities.volume
+    OsdDrawer {
+        id: osdDrawer
+        open: root.visibilities.osd
         anchors.verticalCenter: parent.verticalCenter
         anchors.right: parent.right
     }
