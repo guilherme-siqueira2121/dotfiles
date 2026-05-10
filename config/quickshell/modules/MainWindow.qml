@@ -33,6 +33,30 @@ PanelWindow {
         id: bar
     }
 
+    Rectangle {
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: parent.right
+        height: Theme.barBorder
+        color: Theme.bg
+    }
+
+    Rectangle {
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        anchors.right: parent.right
+        width: Theme.barBorder
+        color: Theme.bg
+    }
+
+    Rectangle{
+        anchors.bottom: parent.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        height: Theme.barBorder
+        color: Theme.bg
+    }
+
     Panels {
         id: panels
         visibilities: visibilities
