@@ -35,6 +35,8 @@ Item {
     Slider {
         anchors.fill: parent
         orientation: Qt.Vertical
+        from: 0.01
+        to: 1.0
         value: level / 100
         onMoved: {
             level = Math.round(value * 100)
