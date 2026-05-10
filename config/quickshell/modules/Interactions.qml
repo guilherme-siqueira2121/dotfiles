@@ -31,7 +31,7 @@ MouseArea {
         const y = event.y
 
         visibilities.clock = inTopPanel(panels.clock, x, y)
-        visibilities.osd = inRightPanel(panels.volume, x, y)
+        visibilities.osd = inRightPanel(panels.osd, x, y)
     }
 
     onExited: {
