@@ -24,6 +24,13 @@ Slider {
             radius: 2
             color: Theme.accent
         }
+
+        Behavior on height {
+            NumberAnimation {
+                duration: Theme.animFast
+                easing.type: Easing.OutCubic
+            }
+        }
     }
 
     handle: Rectangle {
@@ -32,15 +39,12 @@ Slider {
         width: 14
         height: 14
         radius: 7
-        color: Theme.bg
+        color: root.pressed ? Theme.accent : Theme.bg
         border.color: Theme.accent
         border.width: 2
         
-        Behavior on y {
-            NumberAnimation {
-                duration: Theme.animFast
-                easing.type: Easing.OutCubic
-            }
+        Behavior on color {
+            ColorAnimation { duration: Theme.animFast }
         }
     }
 }
