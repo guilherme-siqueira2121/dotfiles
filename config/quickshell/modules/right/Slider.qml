@@ -19,7 +19,7 @@ Slider {
 
         Rectangle {
             width: parent.width
-            height: root.visualPosition * parent.height
+            height: (1 - root.visualPosition) * parent.height
             anchors.bottom: parent.bottom
             radius: 2
             color: Theme.accent
@@ -35,7 +35,7 @@ Slider {
         color: Theme.bg
         border.color: Theme.accent
         border.width: 2
-
+        
         Behavior on y {
             NumberAnimation {
                 duration: Theme.animFast
