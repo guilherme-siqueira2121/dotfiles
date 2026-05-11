@@ -1,11 +1,8 @@
 import QtQuick
-import QtQuick.Controls
 import Quickshell.Io
 import "../../services"
 
 Item {
-    id: root
-
     implicitWidth: 28
     implicitHeight: 120
 
@@ -22,7 +19,7 @@ Item {
 
     Process {
         id: setLevel
-        command: ["bash", "-c", "brightnessctl set " + level + "%"]
+        command: ["bash", "-c", "brightnessctl set " + String(level) + "%"]
     }
 
     Timer {
@@ -34,7 +31,6 @@ Item {
 
     Slider {
         anchors.fill: parent
-        orientation: Qt.Vertical
         from: 0.01
         to: 1.0
         value: level / 100

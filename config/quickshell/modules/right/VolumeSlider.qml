@@ -1,5 +1,4 @@
 import QtQuick
-import QtQuick.Controls
 import Quickshell.Io
 import "../../services"
 
@@ -20,7 +19,7 @@ Item {
 
     Process {
         id: setVol
-        command: ["bash", "-c", "pamixer --set-volume " + level]
+        command: ["bash", "-c", "pamixer --set-volume " + String(level)]
     }
 
     Timer {
@@ -32,7 +31,6 @@ Item {
 
     Slider {
         anchors.fill: parent
-        orientation: Qt.Vertical
         value: level / 100
         onMoved: {
             level = Math.round(value * 100)
