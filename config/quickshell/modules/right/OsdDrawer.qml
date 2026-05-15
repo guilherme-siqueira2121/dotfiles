@@ -1,39 +1,32 @@
 import QtQuick
+import ".."
 import "../../services"
 
-Item {
-    id: root
+Drawer {
+    direction: "right"
 
-    property bool open: false
-    property real offsetScale: open ? 0 : 1
+    implicitWidth: bg.implicitWidth
+    implicitHeight: bg.implicitHeight
 
-    implicitWidth: 112
-    implicitHeight: 180
-
-    visible: offsetScale < 1
-
-    Behavior on offsetScale {
-        NumberAnimation {
-            duration: Theme.animNormal
-            easing.type: Easing.OutCubic
-        }
-    }
-
-    anchors.rightMargin: -implicitWidth * offsetScale
+    anchors.right: parent.right
+    anchors.verticalCenter: parent.verticalCenter
 
     Rectangle {
-        anchors.fill: parent
+        id: bg
+        implicitWidth: col.implicitWidth + 32
+        implicitHeight: col.implicitHeight + 32
         color: Theme.bg
         radius: Theme.radius
         border.color: Theme.border
         border.width: 1
 
-        Row {
+        Column {
+            id: col
             anchors.centerIn: parent
-            spacing: 8
+            spacing: 16
 
             Column {
-                anchors.verticalCenter: parent.verticalCenter
+                anchors.horizontalCenter: parent.horizontalCenter
                 spacing: 8
 
                 Text {
@@ -58,14 +51,14 @@ Item {
             }
 
             Rectangle {
-                width: 1
-                height: 120
-                anchors.verticalCenter: parent.verticalCenter
+                width: 28
+                height: 1
+                anchors.horizontalCenter: parent.horizontalCenter
                 color: Theme.border
             }
 
             Column {
-                anchors.verticalCenter: parent.verticalCenter
+                anchors.horizontalCenter: parent.horizontalCenter
                 spacing: 8
 
                 Text {
