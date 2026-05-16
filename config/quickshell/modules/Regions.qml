@@ -29,6 +29,14 @@ Region {
         height: panel.implicitHeight
     }
 
+    R {
+        panel: panels.session
+        x: win.width - width
+        y: panel.y + Theme.barBorder
+        width:  panel.implicitWidth  * (1 - panel.offsetScale) + Theme.barBorder
+        height: panel.implicitHeight
+    }
+
     component R: Region {
         required property Item panel
 
