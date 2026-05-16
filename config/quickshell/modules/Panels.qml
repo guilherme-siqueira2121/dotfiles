@@ -15,29 +15,26 @@ Item {
     readonly property alias session: sessionDrawer
 
     anchors.fill: parent
-    anchors.leftMargin: bar.implicitWidth
-    anchors.topMargin: Theme.barBorder
-    anchors.rightMargin: Theme.barBorder
-    anchors.bottomMargin: Theme.barBorder
 
     ClockDrawer {
         id: clockDrawer
         open: root.visibilities.clock
-        anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.leftMargin: bar.implicitWidth / 2
     }
 
     OsdDrawer {
         id: osdDrawer
         open: root.visibilities.osd
-        anchors.verticalCenter: parent.verticalCenter
         anchors.right: parent.right
+        anchors.verticalCenter: parent.verticalCenter
     }
 
     SessionDrawer {
         id: sessionDrawer
         open: root.visibilities.session
-        anchors.bottom: parent.bottom
         anchors.right: parent.right
+        anchors.bottom: parent.bottom
     }
 }
