@@ -26,16 +26,25 @@ MouseArea {
         return x > (parent.width - Math.max(Theme.barBorder, Theme.barBorder + panelWidth)) && withinHeight
     }
 
+    function inBottomRightPanel(panel, x, y) {
+        const panelWidth = panel.implicitWidth * (1 - panel.offsetScale)
+        const panelY = parent.height - Theme.barBorder - panel.implicitHeight
+        const withinHeight = y >= panelY && y <= parent.height
+        return x > (parent.width - Math.max(Theme.barBorder, Theme.barBorder + panelWidth)) && withinHeight
+    }
+
     onPositionChanged: event => {
         const x = event.x
         const y = event.y
 
         visibilities.clock = inTopPanel(panels.clock, x, y)
         visibilities.osd = inRightPanel(panels.osd, x, y)
+        visibilities.session = inBottomRightPanel(panels.session, x, y)
     }
 
     onExited: {
         visibilities.clock = false
         visibilities.osd = false
+        visibilities.session = false
     }
 }
