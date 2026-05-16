@@ -3,8 +3,8 @@ import Quickshell.Io
 import "../../services"
 
 Item {
-    implicitWidth: 28
-    implicitHeight: 120
+    implicitWidth: Theme.sliderWidth
+    implicitHeight: Theme.sliderHeight
 
     property int level: 100
 

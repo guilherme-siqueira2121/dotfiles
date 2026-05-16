@@ -17,4 +17,7 @@ Singleton {
     readonly property int radius:     12
     readonly property int animFast:   150
     readonly property int animNormal: 250
+
+    readonly property int sliderWidth: 28
+    readonly property int sliderHeight: 120
 }
