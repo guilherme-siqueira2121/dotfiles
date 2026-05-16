@@ -5,81 +5,59 @@ import "../../services"
 Drawer {
     direction: "right"
 
-    implicitWidth: bg.implicitWidth
-    implicitHeight: bg.implicitHeight
-
-    anchors.right: parent.right
-    anchors.verticalCenter: parent.verticalCenter
-
-    Rectangle {
-        id: bg
-        implicitWidth: col.implicitWidth + 32
-        implicitHeight: col.implicitHeight + 32
-        color: Theme.bg
-        radius: Theme.radius
-        border.color: Theme.border
-        border.width: 1
+    Column {
+        spacing: Theme.drawerPadding
 
         Column {
-            id: col
-            anchors.centerIn: parent
-            spacing: 16
+            anchors.horizontalCenter: parent.horizontalCenter
+            spacing: 8
 
-            Column {
+            Text {
                 anchors.horizontalCenter: parent.horizontalCenter
-                spacing: 8
-
-                Text {
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    text: "󰕾"
-                    color: Theme.accent
-                    font.family: "JetBrains Mono Nerd Font"
-                    font.pixelSize: 14
-                }
-
-                VolumeSlider {
-                    id: volSlider
-                }
-
-                Text {
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    text: volSlider.level + "%"
-                    color: Theme.subtext
-                    font.pixelSize: 10
-                    font.family: "JetBrains Mono Nerd Font"
-                }
+                text: "󰕾"
+                color: Theme.accent
+                font.family: "JetBrains Mono Nerd Font"
+                font.pixelSize: 14
             }
 
-            Rectangle {
-                width: 28
-                height: 1
+            VolumeSlider { id: volSlider }
+
+            Text {
                 anchors.horizontalCenter: parent.horizontalCenter
-                color: Theme.border
+                text: volSlider.level + "%"
+                color: Theme.subtext
+                font.family: "JetBrains Mono Nerd Font"
+                font.pixelSize: 10
+            }
+        }
+
+        Rectangle {
+            width: Theme.sliderWidth
+            height: 1
+            anchors.horizontalCenter: parent.horizontalCenter
+            color: Theme.border
+        }
+
+        Column {
+            anchors.horizontalCenter: parent.horizontalCenter
+            spacing: 8
+
+            Text {
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: "󰃟"
+                color: Theme.accent
+                font.family: "JetBrains Mono Nerd Font"
+                font.pixelSize: 14
             }
 
-            Column {
+            BrightnessSlider { id: brightSlider }
+
+            Text {
                 anchors.horizontalCenter: parent.horizontalCenter
-                spacing: 8
-
-                Text {
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    text: "󰃟"
-                    color: Theme.accent
-                    font.family: "JetBrains Mono Nerd Font"
-                    font.pixelSize: 14
-                }
-
-                BrightnessSlider {
-                    id: brightSlider
-                }
-
-                Text {
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    text: brightSlider.level + "%"
-                    color: Theme.subtext
-                    font.pixelSize: 10
-                    font.family: "JetBrains Mono Nerd Font"
-                }
+                text: brightSlider.level + "%"
+                color: Theme.subtext
+                font.family: "JetBrains Mono Nerd Font"
+                font.pixelSize: 10
             }
         }
     }
