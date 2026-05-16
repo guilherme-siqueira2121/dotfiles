@@ -1,49 +1,18 @@
 import QtQuick
 import Quickshell
-import Quickshell.Io
 import ".."
 import "../../services"
 
 Drawer {
     direction: "right"
 
-    implicitWidth: bg.implicitWidth
-    implicitHeight: bg.implicitHeight
+    Column {
+        spacing: 8
 
-    Rectangle {
-        id: bg
-        implicitWidth:  col.implicitWidth  + 24
-        implicitHeight: col.implicitHeight + 24
-        color: Theme.bg
-        radius: Theme.radius
-        border.color: Theme.border
-        border.width: 1
-
-        Column {
-            id: col
-            anchors.centerIn: parent
-            spacing: 8
-
-            SessionButton {
-                icon: "󰍃"
-                command: ["hyprctl", "dispatch", "exit"]
-            }
-
-            SessionButton {
-                icon: "󰒲"
-                command: ["systemctl", "suspend"]
-            }
-
-            SessionButton {
-                icon: "󰜉"
-                command: ["systemctl", "reboot"]
-            }
-
-            SessionButton {
-                icon: "󰐥"
-                command: ["systemctl", "poweroff"]
-            }
-        }
+        SessionButton { icon: "󰍃"; command: ["hyprctl", "dispatch", "exit"] }
+        SessionButton { icon: "󰒲"; command: ["systemctl", "suspend"] }
+        SessionButton { icon: "󰜉"; command: ["systemctl", "reboot"] }
+        SessionButton { icon: "󰐥"; command: ["systemctl", "poweroff"] }
     }
 
     component SessionButton: Rectangle {
