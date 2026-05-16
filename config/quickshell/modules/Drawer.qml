@@ -8,7 +8,10 @@ Item {
     property real offsetScale: open ? 0 : 1
     property string direction: "right"
 
-    default property alias content: inner.data
+    default property alias content: container.children
+
+    implicitWidth: bg.implicitWidth
+    implicitHeight: bg.implicitHeight
 
     visible: offsetScale < 1
 
@@ -19,13 +22,25 @@ Item {
         }
     }
 
-    anchors.rightMargin: direction === "right" ? -implicitWidth  * offsetScale : 0
-    anchors.leftMargin: direction === "left" ? -implicitWidth  * offsetScale : 0
     anchors.topMargin: direction === "top" ? -implicitHeight * offsetScale : 0
+    anchors.rightMargin: direction === "right" ? -implicitWidth  * offsetScale : 0
     anchors.bottomMargin: direction === "bottom" ? -implicitHeight * offsetScale : 0
+    anchors.leftMargin: direction === "left" ? -implicitWidth  * offsetScale : 0
 
-    Item {
-        id: inner
-        anchors.fill: parent
+    Rectangle {
+        id: bg
+        implicitWidth:  container.implicitWidth + Theme.drawerPadding * 2
+        implicitHeight: container.implicitHeight + Theme.drawerPadding * 2
+        color: Theme.bg
+        radius: Theme.radius
+        border.color: Theme.border
+        border.width: 1
+
+        Item {
+            id: container
+            anchors.centerIn: parent
+            implicitWidth: childrenRect.width
+            implicitHeight: childrenRect.height
+        }
     }
 }
