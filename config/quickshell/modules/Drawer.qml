@@ -33,8 +33,6 @@ Item {
         implicitHeight: container.implicitHeight + Theme.drawerPadding * 2
         color: Theme.bg
         radius: Theme.radius
-        border.color: Theme.border
-        border.width: 1
 
         Item {
             id: container
