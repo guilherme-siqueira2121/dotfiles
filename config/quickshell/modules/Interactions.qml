@@ -9,6 +9,7 @@ MouseArea {
     required property Item panels
 
     anchors.fill: parent
+    anchors.topMargin: -Theme.barBorder
     hoverEnabled: true
     acceptedButtons: Qt.NoButton
 
@@ -16,7 +17,7 @@ MouseArea {
         const panelHeight = panel.implicitHeight * (1 - panel.offsetScale)
         const panelX = bar.implicitWidth + panel.x
         const withinWidth = x >= panelX && x <= panelX + panel.implicitWidth
-        return y < Math.max(Theme.barBorder, Theme.barBorder + panelHeight) && withinWidth
+        return y <= Theme.barBorder + panelHeight && withinWidth
     }
 
     function inRightPanel(panel, x, y) {
@@ -33,18 +34,26 @@ MouseArea {
         return x > (parent.width - Math.max(Theme.barBorder, Theme.barBorder + panelWidth)) && withinHeight
     }
 
+    function inBottomPanel(panel, x, y) {
+        const panelHeight = panel.implicitHeight * (1 - panel.offsetScale)
+        const panelX = bar.implicitWidth + panel.x
+        const withinWidth = x >= panelX && x <= panelX + panel.implicitWidth
+        return y >= (parent.height - Math.max(Theme.barBorder, Theme.barBorder + panelHeight)) && withinWidth
+    }
+
     onPositionChanged: event => {
         const x = event.x
         const y = event.y
-
         visibilities.clock = inTopPanel(panels.clock, x, y)
         visibilities.osd = inRightPanel(panels.osd, x, y)
         visibilities.session = inBottomRightPanel(panels.session, x, y)
+        visibilities.launcher = inBottomPanel(panels.launcher, x, y)
     }
 
     onExited: {
         visibilities.clock = false
         visibilities.osd = false
         visibilities.session = false
+        visibilities.launcher = false
     }
 }
