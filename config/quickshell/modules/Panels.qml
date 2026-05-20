@@ -13,6 +13,7 @@ Item {
     readonly property alias clock: clockDrawer
     readonly property alias osd: osdDrawer
     readonly property alias session: sessionDrawer
+    readonly property alias launcher: launcherDrawer
 
     anchors.fill: parent
 
@@ -36,5 +37,13 @@ Item {
         open: root.visibilities.session
         anchors.right: parent.right
         anchors.bottom: parent.bottom
+    }
+
+    LauncherDrawer {
+        id: launcherDrawer
+        open: root.visibilities.launcher
+        anchors.bottom: parent.bottom
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.leftMargin: bar.implicitWidth / 2
     }
 }
