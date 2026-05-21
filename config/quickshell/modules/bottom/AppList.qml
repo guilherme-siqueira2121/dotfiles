@@ -9,6 +9,24 @@ Item {
 
     property string query: ""
     property bool commandMode: query.startsWith(">")
+    property int selectedIndex: 0
+
+    onQueryChanged: selectedIndex = 0
+
+    function selectPrev() {
+        if (selectedIndex > 0)
+            selectedIndex--
+    }
+
+    function selectNext() {
+        if (selectedIndex < filtered.length - 1)
+            selectedIndex++
+    }
+
+    function launchSelected() {
+        if (filtered.length > 0)
+            launch(filtered[selectedIndex].exec)
+    }
 
     readonly property var commands: [
         { name: "Sair", comment: "Encerrar sessão", icon: "󰍃", exec: "hyprctl dispatch exit" },
@@ -70,13 +88,18 @@ Item {
             width: root.width
             height: 50
             radius: Theme.radius
-            color: itemHover.hovered ? Theme.overlay : "transparent"
+            color: itemHover.hovered || index === root.selectedIndex
+                ? Theme.overlay
+                : "transparent"
 
             Behavior on color {
                 ColorAnimation { duration: Theme.animFast }
             }
 
-            HoverHandler { id: itemHover }
+            HoverHandler {
+                id: itemHover
+                onHoveredChanged: if (hovered) root.selectedIndex = index
+            }
 
             TapHandler {
                 onTapped: root.launch(modelData.exec)
