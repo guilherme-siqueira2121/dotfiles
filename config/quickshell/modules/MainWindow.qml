@@ -16,11 +16,13 @@ PanelWindow {
     WlrLayershell.exclusionMode: ExclusionMode.Ignore
     WlrLayershell.layer: WlrLayer.Overlay
 
+    WlrLayershell.keyboardFocus: visibilities.launcher
+        ? WlrKeyboardFocus.OnDemand
+        : WlrKeyboardFocus.None
+
     mask: regions
 
-    DrawerVisibilities {
-        id: visibilities
-    }
+    DrawerVisibilities { id: visibilities }
 
     Regions {
         id: regions
@@ -29,16 +31,14 @@ PanelWindow {
         win: root
     }
 
-    Bar {
-        id: bar
-    }
+    Bar { id: bar }
 
     Rectangle {
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
         height: Theme.barBorder
-        color: Theme.bg
+        color:  Theme.bg
     }
 
     Rectangle {
@@ -49,7 +49,7 @@ PanelWindow {
         color: Theme.bg
     }
 
-    Rectangle{
+    Rectangle {
         anchors.bottom: parent.bottom
         anchors.left: parent.left
         anchors.right: parent.right
