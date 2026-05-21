@@ -11,6 +11,8 @@ Item {
     property bool commandMode: text.startsWith(">")
 
     signal submitted
+    signal moveUp
+    signal moveDown
 
     function focus() { input.forceActiveFocus() }
     function clear() { input.text = "" }
@@ -48,6 +50,8 @@ Item {
 
                 Keys.onReturnPressed: root.submitted()
                 Keys.onEscapePressed: root.clear()
+                Keys.onUpPressed: root.moveUp()
+                Keys.onDownPressed: root.moveDown()
 
                 Text {
                     anchors.fill: parent
