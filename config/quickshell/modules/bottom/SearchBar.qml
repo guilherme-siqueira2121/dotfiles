@@ -4,13 +4,16 @@ import "../../services"
 Item {
     id: root
 
-    implicitWidth: row.implicitWidth  + 24
+    implicitWidth: 300
     implicitHeight: row.implicitHeight + 16
 
     property alias text: input.text
     property bool commandMode: text.startsWith(">")
 
     signal submitted
+
+    function focus() { input.forceActiveFocus() }
+    function clear() { input.text = "" }
 
     Rectangle {
         anchors.fill: parent
@@ -23,7 +26,7 @@ Item {
             spacing: 8
 
             Text {
-                text:  root.commandMode ? "󰆍" : "󰍉"
+                text: root.commandMode ? "󰆍" : "󰍉"
                 color: root.commandMode ? Theme.accent : Theme.muted
                 font.family: "JetBrains Mono Nerd Font"
                 font.pixelSize: 14
@@ -36,7 +39,7 @@ Item {
 
             TextInput {
                 id: input
-                width: 220
+                width: root.implicitWidth - 48
                 color: Theme.text
                 font.family: "JetBrains Mono Nerd Font"
                 font.pixelSize: 12
@@ -44,11 +47,11 @@ Item {
                 anchors.verticalCenter: parent.verticalCenter
 
                 Keys.onReturnPressed: root.submitted()
-                Keys.onEscapePressed: input.text = ""
+                Keys.onEscapePressed: root.clear()
 
                 Text {
                     anchors.fill: parent
-                    text: "Buscar aplicativos..."
+                    text: "Buscar... Digite > para comandos"
                     color: Theme.muted
                     font: parent.font
                     visible: parent.text === ""
