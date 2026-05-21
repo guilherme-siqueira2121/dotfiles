@@ -29,10 +29,10 @@ Drawer {
         SearchBar {
             id: searchBar
 
-            onSubmitted: {
-                if (appList.filtered.length > 0)
-                    appList.launch(appList.filtered[0].exec)
-            }
+            onSubmitted: appList.launchSelected()
+
+            onMoveUp: appList.selectPrev()
+            onMoveDown: appList.selectNext()
         }
     }
 }
