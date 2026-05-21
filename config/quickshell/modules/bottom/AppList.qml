@@ -5,17 +5,16 @@ import "../../services"
 Item {
     id: root
 
-    implicitWidth: 240
     implicitHeight: Math.min(filtered.length, 6) * 52
 
     property string query: ""
     property bool commandMode: query.startsWith(">")
 
     readonly property var commands: [
-        { name: "Sair", comment: "Encerrar sessão",   icon: "󰍃", exec: "hyprctl dispatch exit" },
+        { name: "Sair", comment: "Encerrar sessão", icon: "󰍃", exec: "hyprctl dispatch exit" },
         { name: "Suspender", comment: "Suspender sistema", icon: "󰒲", exec: "systemctl suspend" },
         { name: "Reiniciar", comment: "Reiniciar sistema", icon: "󰜉", exec: "systemctl reboot" },
-        { name: "Desligar", comment: "Desligar sistema",  icon: "󰐥", exec: "systemctl poweroff" },
+        { name: "Desligar", comment: "Desligar sistema", icon: "󰐥", exec: "systemctl poweroff" },
     ]
 
     property var allApps: []
@@ -26,9 +25,7 @@ Item {
         running: true
         stdout: StdioCollector {
             onStreamFinished: {
-                try {
-                    root.allApps = JSON.parse(text)
-                } catch(e) {}
+                try { root.allApps = JSON.parse(text) } catch(e) {}
             }
         }
     }
@@ -61,7 +58,6 @@ Item {
     }
 
     ListView {
-        id: results
         anchors.fill: parent
         model: root.filtered
         clip: true
@@ -71,7 +67,7 @@ Item {
             required property var modelData
             required property int index
 
-            width: root.implicitWidth
+            width: root.width
             height: 50
             radius: Theme.radius
             color: itemHover.hovered ? Theme.overlay : "transparent"
@@ -128,7 +124,7 @@ Item {
                         font.pixelSize: 10
                         visible: text !== ""
                         elide: Text.ElideRight
-                        width: 180
+                        width: root.width - 60
                     }
                 }
             }
