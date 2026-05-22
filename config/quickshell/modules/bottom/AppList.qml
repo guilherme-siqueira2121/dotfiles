@@ -5,6 +5,8 @@ import "../../services"
 Item {
     id: root
 
+    signal launched
+
     implicitHeight: Math.min(filtered.length, 6) * 52
 
     property string query: ""

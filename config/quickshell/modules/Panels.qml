@@ -45,5 +45,6 @@ Item {
         anchors.bottom: parent.bottom
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.leftMargin: bar.implicitWidth / 2
+        onLaunched: root.visibilities.launcher = false
     }
 }
