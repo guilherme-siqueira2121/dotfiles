@@ -75,6 +75,7 @@ Item {
     function launch(exec) {
         execProc.cmd = exec
         execProc.running = true
+        root.launched()
     }
 
     ListView {
