@@ -6,6 +6,8 @@ Drawer {
     id: root
     direction: "bottom"
 
+    signal launched
+
     onOpenChanged: {
         if (open) searchBar.focus()
         else searchBar.clear()
@@ -18,6 +20,7 @@ Drawer {
             id: appList
             width: searchBar.implicitWidth
             query: searchBar.text
+            onLaunched: root.launched()
         }
 
         Rectangle {
@@ -28,9 +31,7 @@ Drawer {
 
         SearchBar {
             id: searchBar
-
             onSubmitted: appList.launchSelected()
-
             onMoveUp: appList.selectPrev()
             onMoveDown: appList.selectNext()
         }
