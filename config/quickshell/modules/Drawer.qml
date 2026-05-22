@@ -8,7 +8,7 @@ Item {
     property real offsetScale: open ? 0 : 1
     property string direction: "right"
 
-    default property alias content: container.children
+    default property alias content: container.data
 
     implicitWidth: bg.implicitWidth
     implicitHeight: bg.implicitHeight
