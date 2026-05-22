@@ -88,12 +88,25 @@ Item {
             width: root.width
             height: 50
             radius: Theme.radius
-            color: itemHover.hovered || index === root.selectedIndex
-                ? Theme.overlay
-                : "transparent"
 
-            Behavior on color {
-                ColorAnimation { duration: Theme.animFast }
+            property bool isSelected: index === root.selectedIndex
+            property bool isHovered: itemHover.hovered
+
+            color: "transparent"
+
+            Rectangle {
+                anchors.fill: parent
+                radius: parent.radius
+                color: Theme.overlay
+
+                opacity: parent.isSelected || parent.isHovered ? 1.0 : 0.0
+
+                Behavior on opacity {
+                    NumberAnimation {
+                        duration: Theme.animFast
+                        easing.type: Easing.OutCubic
+                    }
+                }
             }
 
             HoverHandler {
