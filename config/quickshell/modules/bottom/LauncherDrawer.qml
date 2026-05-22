@@ -9,7 +9,7 @@ Drawer {
     signal launched
 
     onOpenChanged: {
-        if (open) searchBar.focus()
+        if (open) searchBar.forceSearch()
         else searchBar.clear()
     }
 
