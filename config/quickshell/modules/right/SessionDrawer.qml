@@ -19,7 +19,6 @@ Drawer {
         id: btn
 
         required property string icon
-        required property string label
         required property list<string> command
 
         implicitWidth: row.implicitWidth  + 16
