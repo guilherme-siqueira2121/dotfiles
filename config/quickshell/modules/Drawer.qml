@@ -13,8 +13,6 @@ Item {
     implicitWidth: bg.implicitWidth
     implicitHeight: bg.implicitHeight
 
-    visible: offsetScale < 1
-
     Behavior on offsetScale {
         NumberAnimation {
             duration: Theme.animNormal
@@ -23,13 +21,13 @@ Item {
     }
 
     anchors.topMargin: direction === "top" ? -implicitHeight * offsetScale : 0
-    anchors.rightMargin: direction === "right" ? -implicitWidth  * offsetScale : 0
+    anchors.rightMargin: direction === "right" ? -implicitWidth * offsetScale : 0
     anchors.bottomMargin: direction === "bottom" ? -implicitHeight * offsetScale : 0
-    anchors.leftMargin: direction === "left" ? -implicitWidth  * offsetScale : 0
+    anchors.leftMargin: direction === "left" ? -implicitWidth * offsetScale : 0
 
     Rectangle {
         id: bg
-        implicitWidth:  container.implicitWidth + Theme.drawerPadding * 2
+        implicitWidth: container.implicitWidth + Theme.drawerPadding * 2
         implicitHeight: container.implicitHeight + Theme.drawerPadding * 2
         color: Theme.bg
         radius: Theme.radius
