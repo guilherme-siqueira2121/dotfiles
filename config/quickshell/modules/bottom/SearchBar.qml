@@ -8,13 +8,14 @@ Item {
     implicitHeight: row.implicitHeight + 16
 
     property alias text: input.text
+    property alias inputFocus: input.activeFocus
     property bool commandMode: text.startsWith(">")
 
     signal submitted
     signal moveUp
     signal moveDown
 
-    function focus() { input.forceActiveFocus() }
+    function activate() { input.forceActiveFocus() }
     function clear() { input.text = "" }
 
     Rectangle {
