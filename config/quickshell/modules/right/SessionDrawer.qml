@@ -21,8 +21,8 @@ Drawer {
         required property string icon
         required property list<string> command
 
-        implicitWidth: row.implicitWidth  + 16
-        implicitHeight: row.implicitHeight + 16
+        implicitWidth: 40
+        implicitHeight: 40
         radius: Theme.radius
         color: hover.hovered ? Theme.overlay : "transparent"
 
@@ -36,33 +36,15 @@ Drawer {
             onTapped: Quickshell.execDetached(btn.command)
         }
 
-        Row {
-            id: row
+        Text {
             anchors.centerIn: parent
-            spacing: 10
+            text: btn.icon
+            color: hover.hovered ? Theme.accent : Theme.text
+            font.family: "JetBrains Mono Nerd Font"
+            font.pixelSize: 18
 
-            Text {
-                text: btn.icon
-                color: hover.hovered ? Theme.accent : Theme.text
-                font.family: "JetBrains Mono Nerd Font"
-                font.pixelSize: 18
-                anchors.verticalCenter: parent.verticalCenter
-
-                Behavior on color {
-                    ColorAnimation { duration: Theme.animFast }
-                }
-            }
-
-            Text {
-                text: btn.label
-                color: hover.hovered ? Theme.accent : Theme.subtext
-                font.family: "JetBrains Mono Nerd Font"
-                font.pixelSize: 12
-                anchors.verticalCenter: parent.verticalCenter
-
-                Behavior on color {
-                    ColorAnimation { duration: Theme.animFast }
-                }
+            Behavior on color {
+                ColorAnimation { duration: Theme.animFast }
             }
         }
     }
