@@ -8,7 +8,6 @@ Item {
     implicitHeight: row.implicitHeight + 16
 
     property alias text: input.text
-    property alias inputFocus: input.activeFocus
     property bool commandMode: text.startsWith(">")
 
     signal submitted
@@ -56,7 +55,9 @@ Item {
 
                 Text {
                     anchors.fill: parent
-                    text: "Buscar... Digite > para comandos"
+                    text: root.commandMode
+                        ? "Buscar ações..."
+                        : "Buscar aplicativos...  > para ações"
                     color: Theme.muted
                     font: parent.font
                     visible: parent.text === ""
