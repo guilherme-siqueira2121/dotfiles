@@ -1,6 +1,5 @@
 import QtQuick
 import Quickshell
-import Quickshell.Io
 import "../../services"
 
 Item {
@@ -8,41 +7,28 @@ Item {
 
     signal launched
 
-    implicitHeight: Math.min(filtered.length, 6) * 52
-
     property string query: ""
     property int selectedIndex: 0
 
-    onQueryChanged: selectedIndex = 0
-
-    function selectPrev() {
-        if (selectedIndex > 0) selectedIndex--
+    readonly property var filtered: {
+        const q = query.trim().toLowerCase()
+        if (q === "") return DesktopEntries.applications.values.slice(0, 6)
+        return DesktopEntries.applications.values.filter(a =>
+            (a.name ?? "").toLowerCase().includes(q) ||
+            (a.comment ?? "").toLowerCase().includes(q)
+        ).slice(0, 6)
     }
 
-    function selectNext() {
-        if (selectedIndex < filtered.length - 1) selectedIndex++
-    }
+    implicitWidth: 300
+    implicitHeight: Math.min(filtered.length, 6) * 52
 
     function launchSelected() {
         if (filtered.length > 0) launch(filtered[selectedIndex])
     }
 
     function launch(entry) {
-        Quickshell.execDetached({
-            command: entry.command
-        })
+        entry.launch()
         root.launched()
-    }
-
-    readonly property var allApps: DesktopEntries.applications.values
-
-    readonly property var filtered: {
-        const q = query.trim().toLowerCase()
-        if (q === "") return allApps.slice(0, 6)
-        return allApps.filter(a =>
-            (a.name ?? "").toLowerCase().includes(q) ||
-            (a.comment ?? "").toLowerCase().includes(q)
-        ).slice(0, 6)
     }
 
     ListView {
