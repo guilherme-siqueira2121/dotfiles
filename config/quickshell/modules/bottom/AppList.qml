@@ -27,7 +27,7 @@ Item {
     }
 
     function launch(entry) {
-        entry.launch()
+        entry.execute()
         root.launched()
     }
 
