@@ -16,8 +16,8 @@ Drawer {
     Column {
         spacing: 8
 
-        AppList {
-            id: appList
+        ContentList {
+            id: contentList
             width: searchBar.implicitWidth
             query: searchBar.text
             onLaunched: root.launched()
@@ -31,9 +31,9 @@ Drawer {
 
         SearchBar {
             id: searchBar
-            onSubmitted: appList.launchSelected()
-            onMoveUp: appList.selectPrev()
-            onMoveDown: appList.selectNext()
+            onSubmitted: contentList.launchSelected()
+            onMoveUp: contentList.selectPrev()
+            onMoveDown: contentList.selectNext()
         }
     }
 }
