@@ -16,13 +16,11 @@ PanelWindow {
     WlrLayershell.exclusionMode: ExclusionMode.Ignore
     WlrLayershell.layer: WlrLayer.Overlay
 
-    WlrLayershell.keyboardFocus: visibilities.launcher
+    WlrLayershell.keyboardFocus: DrawerVisibilities.launcher
         ? WlrKeyboardFocus.OnDemand
         : WlrKeyboardFocus.None
 
     mask: regions
-
-    DrawerVisibilities { id: visibilities }
 
     Regions {
         id: regions
@@ -59,12 +57,10 @@ PanelWindow {
 
     Panels {
         id: panels
-        visibilities: visibilities
         bar: bar
     }
 
     Interactions {
-        visibilities: visibilities
         bar: bar
         panels: panels
     }

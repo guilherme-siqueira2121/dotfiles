@@ -4,7 +4,6 @@ import "../services"
 MouseArea {
     id: root
 
-    required property DrawerVisibilities visibilities
     required property Item bar
     required property Item panels
 
@@ -43,17 +42,17 @@ MouseArea {
 
     onPositionChanged: event => {
         const x = event.x
-        const y = event.y
-        visibilities.clock = inTopPanel(panels.clock, x, y)
-        visibilities.osd = inRightPanel(panels.osd, x, y)
-        visibilities.session = inBottomRightPanel(panels.session, x, y)
-        visibilities.launcher = inBottomPanel(panels.launcher, x, y)
+        const y = event.yz
+        DrawerVisibilities.clock = inTopPanel(panels.clock, x, y)
+        DrawerVisibilities.osd = inRightPanel(panels.osd, x, y)
+        DrawerVisibilities.session = inBottomRightPanel(panels.session, x, y)
+        DrawerVisibilities.launcher = inBottomPanel(panels.launcher, x, y)
     }
 
     onExited: {
-        visibilities.clock = false
-        visibilities.osd = false
-        visibilities.session = false
-        visibilities.launcher = false
+        DrawerVisibilities.clock = false
+        DrawerVisibilities.osd = false
+        DrawerVisibilities.session = false
+        DrawerVisibilities.launcher = false
     }
 }

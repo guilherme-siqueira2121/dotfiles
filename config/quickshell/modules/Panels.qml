@@ -7,7 +7,6 @@ import "../services"
 Item {
     id: root
 
-    required property DrawerVisibilities visibilities
     required property Item bar
 
     readonly property alias clock: clockDrawer
@@ -19,7 +18,7 @@ Item {
 
     ClockDrawer {
         id: clockDrawer
-        open: root.visibilities.clock
+        open: DrawerVisibilities.clock
         anchors.top: parent.top
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.leftMargin: bar.implicitWidth / 2
@@ -27,21 +26,21 @@ Item {
 
     OsdDrawer {
         id: osdDrawer
-        open: root.visibilities.osd
+        open: DrawerVisibilities.osd
         anchors.right: parent.right
         anchors.verticalCenter: parent.verticalCenter
     }
 
     SessionDrawer {
         id: sessionDrawer
-        open: root.visibilities.session
+        open: DrawerVisibilities.session
         anchors.right: parent.right
         anchors.bottom: parent.bottom
     }
 
     LauncherDrawer {
         id: launcherDrawer
-        open: root.visibilities.launcher
+        open: DrawerVisibilities.launcher
         anchors.bottom: parent.bottom
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.leftMargin: bar.implicitWidth / 2
