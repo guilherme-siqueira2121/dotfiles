@@ -1,6 +1,8 @@
+pragma Singleton
 import QtQuick
+import Quickshell
 
-QtObject {
+Singleton {
     property bool clock: false
     property bool osd: false
     property bool session: false
