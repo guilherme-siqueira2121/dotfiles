@@ -42,7 +42,7 @@ MouseArea {
 
     onPositionChanged: event => {
         const x = event.x
-        const y = event.yz
+        const y = event.y
         DrawerVisibilities.clock = inTopPanel(panels.clock, x, y)
         DrawerVisibilities.osd = inRightPanel(panels.osd, x, y)
         DrawerVisibilities.session = inBottomRightPanel(panels.session, x, y)
