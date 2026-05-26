@@ -9,6 +9,7 @@ Item {
     implicitHeight: Theme.sliderHeight
 
     property int level: 0
+    property real sliderFrom: 0
 
     property var getCommand: []
     property var setCommand: []
@@ -38,7 +39,7 @@ Item {
 
     Slider {
         anchors.fill: parent
-        from: 0
+        from: root.sliderFrom
         to: 100
         value: root.level
         onMoved: {
