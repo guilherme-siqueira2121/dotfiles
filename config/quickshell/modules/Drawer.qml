@@ -19,7 +19,7 @@ Item {
             easing.type: (root.direction === "right" || root.direction === "left")
                 ? Easing.OutBack
                 : Easing.OutCubic
-            easing.overshoot: 2.0
+            easing.overshoot: 1.5
         }
     }
 
