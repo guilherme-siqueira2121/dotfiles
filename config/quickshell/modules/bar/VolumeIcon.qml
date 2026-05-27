@@ -34,11 +34,9 @@ BarIcon {
         }
     }
 
-    Text {
+    FadeIcon {
         anchors.centerIn: parent
-        font.family: "JetBrains Mono Nerd Font"
-        font.pixelSize: 16
+        icon: muted ? "󰝟" : level < 30 ? "󰕿" : level < 70 ? "󰖀" : "󰕾"
         color: muted ? Theme.muted : Theme.accent
-        text: muted ? "󰝟" : level < 30 ? "󰕿" : level < 70 ? "󰖀" : "󰕾"
     }
 }
