@@ -3,14 +3,14 @@ import QtQuick
 import Quickshell
 
 Singleton {
-    readonly property color bg: "#f5f0e8"
-    readonly property color surface: "#ede8de"
-    readonly property color overlay: "#e4ddd2"
-    readonly property color text: "#2c2416"
-    readonly property color subtext: "#6b5c45"
-    readonly property color border: "#d4c9b8"
-    readonly property color accent: "#c8a97e"
-    readonly property color muted: "#a8997e"
+    readonly property color bg: ThemeManager.current === "dark" ? Dark.bg      : Light.bg
+    readonly property color surface: ThemeManager.current === "dark" ? Dark.surface : Light.surface
+    readonly property color overlay: ThemeManager.current === "dark" ? Dark.overlay : Light.overlay
+    readonly property color text: ThemeManager.current === "dark" ? Dark.text    : Light.text
+    readonly property color subtext: ThemeManager.current === "dark" ? Dark.subtext : Light.subtext
+    readonly property color border: ThemeManager.current === "dark" ? Dark.border  : Light.border
+    readonly property color accent: ThemeManager.current === "dark" ? Dark.accent  : Light.accent
+    readonly property color muted: ThemeManager.current === "dark" ? Dark.muted   : Light.muted
 
     readonly property int barWidth: 54
     readonly property int barBorder: 14
