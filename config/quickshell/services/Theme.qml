@@ -1,6 +1,7 @@
 pragma Singleton
 import QtQuick
 import Quickshell
+import "./themes"
 
 Singleton {
     readonly property color bg: ThemeManager.current === "dark" ? Dark.bg      : Light.bg
