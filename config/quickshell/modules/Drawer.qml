@@ -16,7 +16,10 @@ Item {
     Behavior on offsetScale {
         NumberAnimation {
             duration: Theme.animNormal
-            easing.type: Easing.OutCubic
+            easing.type: (root.direction === "right" || root.direction === "left")
+                ? Easing.OutBack
+                : Easing.OutCubic
+            easing.overshoot: 2.0
         }
     }
 
