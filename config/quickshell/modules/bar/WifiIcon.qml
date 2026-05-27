@@ -21,11 +21,9 @@ BarIcon {
         onTriggered: proc.running = true
     }
 
-    Text {
+    FadeIcon {
         anchors.centerIn: parent
-        font.family: "JetBrains Mono Nerd Font"
-        font.pixelSize: 16
+        icon: ssid === "" ? "󰤠" : "󰤢"
         color: ssid === "" ? Theme.muted : Theme.accent
-        text: ssid === "" ? "󰤠" : "󰤢"
     }
 }
