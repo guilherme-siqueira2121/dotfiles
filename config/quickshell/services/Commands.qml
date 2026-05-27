@@ -34,6 +34,12 @@ Singleton {
             icon: "󰸉",
             action: () => Quickshell.execDetached(["bash", "-c", "$HOME/dotfiles/bin/change-wall.sh"])
         },
+        {
+            name: "Tema",
+            comment: "Alternar entre claro e escuro",
+            icon: "󰔎",
+            action: () => ThemeManager.toggle()
+        },
     ]
 
     function query(text) {
