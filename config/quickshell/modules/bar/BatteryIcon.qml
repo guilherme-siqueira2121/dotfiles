@@ -34,11 +34,9 @@ BarIcon {
         }
     }
 
-    Text {
+    FadeIcon {
         anchors.centerIn: parent
-        font.family: "JetBrains Mono Nerd Font"
-        font.pixelSize: 16
+        icon: charging ? "󰂄" : level > 80 ? "󰁹" : level > 50 ? "󰂀" : level > 20 ? "󰁽" : "󰁺"
         color: level <= 20 ? "#e06c75" : Theme.accent
-        text: charging ? "󰂄" : level > 80 ? "󰁹" : level > 50 ? "󰂀" : level > 20 ? "󰁽" : "󰁺"
     }
 }
