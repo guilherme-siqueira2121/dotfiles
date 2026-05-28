@@ -11,49 +11,44 @@ Item {
     implicitHeight: 20
 
     Text {
-        id: current
+        id: textA
         anchors.centerIn: parent
         text: root.icon
         color: root.color
         font.family: "JetBrains Mono Nerd Font"
         font.pixelSize: 16
-        opacity: 1.0
 
         Behavior on opacity {
-            NumberAnimation {
-                duration: Theme.animFast
-                easing.type: Easing.OutCubic
-            }
+            NumberAnimation { duration: Theme.animFast }
         }
     }
 
     Text {
-        id: previous
+        id: textB
         anchors.centerIn: parent
         font.family: "JetBrains Mono Nerd Font"
         font.pixelSize: 16
-        opacity: 0.0
+        opacity: 0
 
         Behavior on opacity {
-            NumberAnimation {
-                duration: Theme.animFast
-                easing.type: Easing.OutCubic
-            }
+            NumberAnimation { duration: Theme.animFast }
         }
     }
 
+    property bool useA: true
+
     onIconChanged: {
-        previous.text  = current.text
-        previous.color = current.color
-        previous.opacity = 1.0
-
-        current.text = root.icon
-        current.color = root.color
-        current.opacity = 0.0
-
-        Qt.callLater(() => {
-            current.opacity  = 1.0
-            previous.opacity = 0.0
-        })
+        if (useA) {
+            textB.text    = root.icon
+            textB.color   = root.color
+            textB.opacity = 1
+            textA.opacity = 0
+        } else {
+            textA.text    = root.icon
+            textA.color   = root.color
+            textA.opacity = 1
+            textB.opacity = 0
+        }
+        useA = !useA
     }
 }
