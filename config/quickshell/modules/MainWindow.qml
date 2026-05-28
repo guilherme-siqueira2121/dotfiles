@@ -64,36 +64,4 @@ PanelWindow {
         bar: bar
         panels: panels
     }
-
-    Rectangle {
-        id: tooltipBox
-        visible: TooltipState.text !== ""
-        x: Theme.barWidth + 8
-        y: TooltipState.y - height / 2
-        width: tooltipLabel.implicitWidth + 16
-        height: tooltipLabel.implicitHeight + 10
-        color: Theme.surface
-        radius: Theme.radius
-        border.color: Theme.border
-        border.width: 1
-        z: 200
-
-        opacity: visible ? 1.0 : 0.0
-
-        Behavior on opacity {
-            NumberAnimation {
-                duration: Theme.animFast
-                easing.type: Easing.OutCubic
-            }
-        }
-
-        Text {
-            id: tooltipLabel
-            anchors.centerIn: parent
-            text: TooltipState.text
-            color: Theme.text
-            font.family: "JetBrains Mono Nerd Font"
-            font.pixelSize: 11
-        }
-    }
 }
