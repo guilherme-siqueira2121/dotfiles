@@ -7,10 +7,11 @@ Item {
     height: 28
 
     default property alias content: inner.data
+    property string tooltip: ""
 
-    HoverHandler {
-        id: hover
-    }
+    readonly property bool hovered: hover.hovered
+
+    HoverHandler { id: hover }
 
     Item {
         id: inner
@@ -25,6 +26,15 @@ Item {
                 duration: Theme.animFast
                 easing.type: Easing.OutBack
             }
+        }
+    }
+
+    onHoveredChanged: {
+        if (hovered && tooltip !== "") {
+            TooltipState.text = tooltip
+            TooltipState.y = root.mapToGlobal(0, root.height / 2).y
+        } else {
+            TooltipState.text = ""
         }
     }
 }
