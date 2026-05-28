@@ -39,13 +39,13 @@ Item {
 
     onIconChanged: {
         if (useA) {
-            textB.text    = root.icon
-            textB.color   = root.color
+            textB.text = root.icon
+            textB.color = root.color
             textB.opacity = 1
             textA.opacity = 0
         } else {
-            textA.text    = root.icon
-            textA.color   = root.color
+            textA.text = root.icon
+            textA.color = root.color
             textA.opacity = 1
             textB.opacity = 0
         }
