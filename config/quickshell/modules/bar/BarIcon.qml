@@ -31,8 +31,10 @@ Item {
 
     onHoveredChanged: {
         if (hovered && tooltip !== "") {
+            var pos = root.mapToItem(null, root.width, root.height / 2)
+            TooltipState.x = pos.x
+            TooltipState.y = pos.y
             TooltipState.text = tooltip
-            TooltipState.y = root.mapToGlobal(0, root.height / 2).y
         } else {
             TooltipState.text = ""
         }
