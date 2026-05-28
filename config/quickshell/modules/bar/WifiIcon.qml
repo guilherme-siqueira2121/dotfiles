@@ -4,6 +4,8 @@ import "../../services"
 
 BarIcon {
     property string ssid: ""
+    
+    tooltip: ssid === "" ? "Desconectado" : ssid
 
     Process {
         id: proc
