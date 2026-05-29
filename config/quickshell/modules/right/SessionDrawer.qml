@@ -39,7 +39,7 @@ Drawer {
         Text {
             anchors.centerIn: parent
             text: btn.icon
-            color: hover.hovered ? Theme.accent : Theme.text
+            color: hover.hovered ? Theme.text : Theme.accent
             font.family: "JetBrains Mono Nerd Font"
             font.pixelSize: 18
 
