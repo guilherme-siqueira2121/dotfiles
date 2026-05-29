@@ -24,6 +24,6 @@ BarIcon {
     FadeIcon {
         anchors.centerIn: parent
         icon: ssid === "" ? "󰤠" : "󰤢"
-        color: ssid === "" ? Theme.muted : Theme.accent
+        color: Theme.accent
     }
 }
