@@ -37,6 +37,13 @@ Item {
         onTriggered: getProc.running = true
     }
 
+    Timer {
+        id: debounce
+        interval: 80
+        repeat: false
+        onTriggered: setProc.running = true
+    }
+
     Slider {
         anchors.fill: parent
         from: root.sliderFrom
@@ -44,7 +51,7 @@ Item {
         value: root.level
         onMoved: {
             root.level = Math.round(value)
-            setProc.running = true
+            debounce.restart()
         }
     }
 }
