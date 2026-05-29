@@ -1,55 +1,62 @@
 import QtQuick
-import Quickshell
-import Quickshell.Wayland
-import "../services"
+import QtQuick.Controls
+import "../../services"
 
-PanelWindow {
+Popup {
     id: root
 
-    anchors.left: true
-    anchors.top: true
-    anchors.bottom: true
+    required property Item target
+    required property string text
+    property int delay: 600
 
-    implicitWidth: TooltipState.text !== ""
-        ? label.implicitWidth + 24
-        : 1
+    visible: false
+    modal: false
+    closePolicy: Popup.NoAutoClose
+    padding: 0
+    background: Item {}
 
-    color: "transparent"
-    WlrLayershell.exclusionMode: ExclusionMode.Ignore
-    WlrLayershell.layer: WlrLayer.Overlay
-
-    mask: Region {
-        x: Theme.barWidth + 8
-        y: tooltipBox.y
-        width: tooltipBox.visible ? tooltipBox.width : 0
-        height: tooltipBox.visible ? tooltipBox.height : 0
+    Timer {
+        id: showTimer
+        interval: root.delay
+        onTriggered: root.visible = true
     }
 
-    Rectangle {
-        id: tooltipBox
-        visible: TooltipState.text !== ""
-        x: Theme.barWidth + 8
-        y: TooltipState.y - height / 2
-        width: label.implicitWidth + 16
-        height: label.implicitHeight + 10
+    function updatePosition() {
+        Qt.callLater(() => {
+            const pos = target.mapToItem(parent, 0, 0)
+            x = pos.x + target.width + 8
+            y = pos.y + target.height / 2 - height / 2
+        })
+    }
+
+    onVisibleChanged: {
+        if (visible) updatePosition()
+    }
+
+    Connections {
+        target: root.target
+        function onHoveredChanged() {
+            if (root.target.hovered) {
+                showTimer.start()
+            } else {
+                showTimer.stop()
+                root.visible = false
+            }
+        }
+    }
+
+    contentItem: Rectangle {
+        implicitWidth: label.implicitWidth + 16
+        implicitHeight: label.implicitHeight + 8
         color: Theme.surface
         radius: Theme.radius
         border.color: Theme.border
         border.width: 1
 
-        opacity: visible ? 1.0 : 0.0
-
-        Behavior on opacity {
-            NumberAnimation {
-                duration: Theme.animFast
-                easing.type: Easing.OutCubic
-            }
-        }
-
         Text {
             id: label
             anchors.centerIn: parent
-            text: TooltipState.text
+            text: root.text
             color: Theme.text
             font.family: "JetBrains Mono Nerd Font"
             font.pixelSize: 11
