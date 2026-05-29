@@ -6,7 +6,7 @@ import Quickshell.Io
 Singleton {
     id: root
 
-    readonly property string configPath: Quickshell.configDir + "/theme"
+    readonly property string configPath: Quickshell.configShell + "/theme"
 
     property string current: "light"
 
