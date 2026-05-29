@@ -6,8 +6,6 @@ BarIcon {
     property int level: 0
     property bool muted: false
 
-    tooltip: muted ? "Mudo" : level + "%"
-
     Process {
         id: volProc
         command: ["bash", "-c", "pamixer --get-volume 2>/dev/null || echo 0"]

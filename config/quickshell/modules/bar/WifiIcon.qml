@@ -5,8 +5,6 @@ import "../../services"
 BarIcon {
     property string ssid: ""
     
-    tooltip: ssid === "" ? "Desconectado" : ssid
-
     Process {
         id: proc
         command: ["bash", "-c", "iwgetid -r 2>/dev/null || echo ''"]

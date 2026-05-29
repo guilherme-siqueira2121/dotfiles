@@ -6,8 +6,6 @@ BarIcon {
     property int level: 100
     property bool charging: false
 
-    tooltip: (charging ? "Carregando — " : "") + level + "%"
-
     Process {
         id: capacityProc
         command: ["bash", "-c", "cat /sys/class/power_supply/BAT0/capacity 2>/dev/null || echo 100"]
