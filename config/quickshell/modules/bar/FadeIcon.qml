@@ -13,10 +13,9 @@ Item {
     Text {
         id: textA
         anchors.centerIn: parent
-        text: root.icon
-        color: root.color
         font.family: "JetBrains Mono Nerd Font"
         font.pixelSize: 16
+        opacity: 1
 
         Behavior on opacity {
             NumberAnimation { duration: Theme.animFast }
@@ -33,6 +32,11 @@ Item {
         Behavior on opacity {
             NumberAnimation { duration: Theme.animFast }
         }
+    }
+
+    Component.onCompleted: {
+        textA.text  = root.icon
+        textA.color = root.color
     }
 
     property bool useA: true
