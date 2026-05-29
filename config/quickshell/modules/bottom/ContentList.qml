@@ -32,6 +32,7 @@ Item {
     }
 
     onQueryChanged: selectedIndex = 0
+    onActionModeChanged: selectedIndex = 0
 
     Item {
         id: list
