@@ -41,9 +41,9 @@ Item {
             required property var modelData
             required property int index
 
-            iconText:   (modelData.name ?? "?").charAt(0).toUpperCase()
-            name:       modelData.name ?? ""
-            comment:    modelData.comment ?? ""
+            iconText: (modelData.name ?? "?").charAt(0).toUpperCase()
+            name: modelData.name ?? ""
+            comment: modelData.comment ?? ""
             isSelected: index === root.selectedIndex
 
             onTapped: root.launch(modelData)

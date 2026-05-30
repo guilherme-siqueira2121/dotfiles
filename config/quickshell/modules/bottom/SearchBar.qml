@@ -55,12 +55,28 @@ Item {
 
                 Text {
                     anchors.fill: parent
-                    text: root.commandMode
-                        ? "Buscar ações..."
-                        : "Buscar aplicativos...  > para ações"
+                    text: root.commandMode ? "Search actions..." : "Search apps..."
                     color: Theme.muted
                     font: parent.font
                     visible: parent.text === ""
+                }
+            }
+
+            Rectangle {
+                visible: !root.commandMode
+                anchors.verticalCenter: parent.verticalCenter
+                color: Theme.surface
+                radius: 4
+                implicitWidth: badge.implicitWidth + 8
+                implicitHeight: badge.implicitHeight + 4
+
+                Text {
+                    id: badge
+                    anchors.centerIn: parent
+                    text: "> actions"
+                    color: Theme.muted
+                    font.family: "JetBrains Mono Nerd Font"
+                    font.pixelSize: 9
                 }
             }
         }

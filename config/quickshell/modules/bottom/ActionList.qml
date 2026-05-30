@@ -31,9 +31,9 @@ Item {
             required property var modelData
             required property int index
 
-            iconText:   modelData.icon
-            name:       modelData.name
-            comment:    modelData.comment
+            iconText: modelData.icon
+            name: modelData.name
+            comment: modelData.comment
             isSelected: index === root.selectedIndex
 
             onTapped: {
