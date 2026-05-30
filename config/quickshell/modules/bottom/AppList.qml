@@ -47,7 +47,7 @@ Item {
             isSelected: index === root.selectedIndex
 
             onTapped: root.launch(modelData)
-            onHoveredChanged: if (hovered) root.selectedIndex = index
+            onHovered: root.selectedIndex = index
         }
     }
 }

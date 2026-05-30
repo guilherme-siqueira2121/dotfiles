@@ -10,13 +10,17 @@ Rectangle {
     required property bool isSelected
 
     signal tapped
+    signal hovered
 
     width: 300
     height: 50
     radius: Theme.radius
     color: "transparent"
 
-    HoverHandler { id: hover }
+    HoverHandler {
+        id: hover
+        onHoveredChanged: if (hover.hovered) root.hovered()
+    }
 
     TapHandler {
         onTapped: root.tapped()

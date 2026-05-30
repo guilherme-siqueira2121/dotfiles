@@ -40,7 +40,7 @@ Item {
                 modelData.action()
                 root.launched()
             }
-            onHoveredChanged: if (hovered) root.selectedIndex = index
+            onHovered: root.selectedIndex = index
         }
     }
 }
