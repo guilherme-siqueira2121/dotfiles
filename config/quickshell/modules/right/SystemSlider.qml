@@ -10,17 +10,20 @@ Item {
 
     property int level: 0
     property real sliderFrom: 0
-
     property var getCommand: []
     property var setCommand: []
     property int pollInterval: 2000
+
+    property bool dragging: false
 
     Process {
         id: getProc
         command: root.getCommand
         running: root.getCommand.length > 0
         stdout: StdioCollector {
-            onStreamFinished: root.level = parseInt(text.trim())
+            onStreamFinished: {
+                if (!root.dragging) root.level = parseInt(text.trim())
+            }
         }
     }
 
@@ -34,7 +37,9 @@ Item {
         interval: root.pollInterval
         running: true
         repeat: true
-        onTriggered: getProc.running = true
+        onTriggered: {
+            if (!root.dragging) getProc.running = true
+        }
     }
 
     Timer {
@@ -49,6 +54,9 @@ Item {
         from: root.sliderFrom
         to: 100
         value: root.level
+
+        onPressedChanged: root.dragging = pressed
+
         onMoved: {
             root.level = Math.round(value)
             debounce.restart()
