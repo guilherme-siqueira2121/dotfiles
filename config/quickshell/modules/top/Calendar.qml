@@ -11,19 +11,20 @@ Item {
         precision: SystemClock.Minutes
     }
 
+    readonly property var months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+
     readonly property var today: new Date(clock.date)
     readonly property int currentDay: today.getDate()
     readonly property int currentMonth: today.getMonth()
     readonly property int currentYear: today.getFullYear()
 
     readonly property int firstWeekday: new Date(currentYear, currentMonth, 1).getDay()
-
     readonly property int daysInMonth: new Date(currentYear, currentMonth + 1, 0).getDate()
 
     Text {
         id: header
         anchors.horizontalCenter: parent.horizontalCenter
-        text: Qt.formatDate(today, "MMMM  yyyy")
+        text: months[currentMonth] + "  " + currentYear
         color: Theme.text
         font.family: "JetBrains Mono Nerd Font"
         font.pixelSize: 11
@@ -39,7 +40,7 @@ Item {
         columnSpacing: 2
 
         Repeater {
-            model: ["D", "S", "T", "Q", "Q", "S", "S"]
+            model: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
             Text {
                 width: 24; height: 20
                 horizontalAlignment: Text.AlignHCenter
