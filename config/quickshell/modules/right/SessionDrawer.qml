@@ -9,10 +9,10 @@ Drawer {
     Column {
         spacing: 8
 
-        SessionButton { icon: "󰍃"; command: ["hyprctl", "dispatch", "exit"] }
-        SessionButton { icon: "󰒲"; command: ["systemctl", "suspend"] }
-        SessionButton { icon: "󰜉"; command: ["systemctl", "reboot"] }
-        SessionButton { icon: "󰐥"; command: ["systemctl", "poweroff"] }
+        SessionButton { icon: "󰍃"; command: ["hyprctl", "dispatch", "exit"]; requireHold: false }
+        SessionButton { icon: "󰒲"; command: ["systemctl", "suspend"];         requireHold: false }
+        SessionButton { icon: "󰜉"; command: ["systemctl", "reboot"];          requireHold: true }
+        SessionButton { icon: "󰐥"; command: ["systemctl", "poweroff"];        requireHold: true }
     }
 
     component SessionButton: Rectangle {
@@ -20,6 +20,7 @@ Drawer {
 
         required property string icon
         required property list<string> command
+        required property bool requireHold
 
         implicitWidth: 40
         implicitHeight: 40
@@ -33,7 +34,34 @@ Drawer {
         HoverHandler { id: hover }
 
         TapHandler {
+            enabled: !btn.requireHold
             onTapped: Quickshell.execDetached(btn.command)
+        }
+
+        LongPressHandler {
+            id: longPress
+            enabled: btn.requireHold
+            duration: 800
+            onActivated: Quickshell.execDetached(btn.command)
+        }
+
+        Rectangle {
+            visible: btn.requireHold && hover.hovered
+            anchors.centerIn: parent
+            width: 36
+            height: 36
+            radius: Theme.radius
+            color: "transparent"
+
+            Rectangle {
+                anchors.bottom: parent.bottom
+                anchors.left: parent.left
+                anchors.right: parent.right
+                height: parent.height * longPress.progress
+                radius: Theme.radius
+                color: Theme.accent
+                opacity: 0.25
+            }
         }
 
         Text {
