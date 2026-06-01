@@ -40,6 +40,7 @@ Drawer {
 
         LongPressHandler {
             id: longPress
+            anchors.fill: parent
             enabled: btn.requireHold
             duration: 800
             onActivated: Quickshell.execDetached(btn.command)
