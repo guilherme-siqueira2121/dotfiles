@@ -35,8 +35,10 @@ Item {
     }
 
     Component.onCompleted: {
-        textA.text  = root.icon
+        textA.text = root.icon
         textA.color = root.color
+        textB.text = root.icon
+        textB.color = root.icon
     }
 
     property bool useA: true
