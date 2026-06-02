@@ -38,7 +38,7 @@ Item {
         textA.text = root.icon
         textA.color = root.color
         textB.text = root.icon
-        textB.color = root.icon
+        textB.color = root.color
     }
 
     property bool useA: true

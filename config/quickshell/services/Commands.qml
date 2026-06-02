@@ -5,38 +5,38 @@ import Quickshell
 Singleton {
     readonly property var actions: [
         {
-            name: "Sair",
-            comment: "Encerrar sessão Hyprland",
+            name: "Exit",
+            comment: "End Hyprland session",
             icon: "󰍃",
             action: () => Quickshell.execDetached(["hyprctl", "dispatch", "exit"])
         },
         {
-            name: "Suspender",
-            comment: "Suspender o sistema",
+            name: "Suspend",
+            comment: "Suspend the system",
             icon: "󰒲",
             action: () => Quickshell.execDetached(["systemctl", "suspend"])
         },
         {
-            name: "Reiniciar",
-            comment: "Reiniciar o sistema",
+            name: "Reboot",
+            comment: "Reboot the system",
             icon: "󰜉",
             action: () => Quickshell.execDetached(["systemctl", "reboot"])
         },
         {
-            name: "Desligar",
-            comment: "Desligar o sistema",
+            name: "Shutdown",
+            comment: "Shut down the system",
             icon: "󰐥",
             action: () => Quickshell.execDetached(["systemctl", "poweroff"])
         },
         {
             name: "Wallpaper",
-            comment: "Trocar wallpaper aleatoriamente",
+            comment: "Change wallpaper randomly",
             icon: "󰸉",
             action: () => Quickshell.execDetached(["bash", "-c", "$HOME/dotfiles/bin/change-wall.sh"])
         },
         {
-            name: "Tema",
-            comment: "Alternar entre claro e escuro",
+            name: "Theme",
+            comment: "Toggle between light and dark",
             icon: "󰔎",
             action: () => ThemeManager.toggle()
         },
