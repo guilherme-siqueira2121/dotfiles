@@ -47,7 +47,8 @@ Drawer {
 
             FadeIcon {
                 anchors.horizontalCenter: parent.horizontalCenter
-                icon: brightSlider.level < 30 ? "󰃞"
+                icon: brightSlider.level < 0 ? "󰃞"
+                    : brightSlider.level < 30 ? "󰃞"
                     : brightSlider.level < 70 ? "󰃟"
                     : "󰃠"
                 color: Theme.accent
@@ -57,7 +58,7 @@ Drawer {
 
             Text {
                 anchors.horizontalCenter: parent.horizontalCenter
-                text: brightSlider.level + "%"
+                text: brightSlider.level < 0 ? "..." : brightSlider.level + "%"
                 color: Theme.subtext
                 font.family: "JetBrains Mono Nerd Font"
                 font.pixelSize: 10
