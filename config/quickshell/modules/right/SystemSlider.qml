@@ -53,7 +53,7 @@ Item {
         anchors.fill: parent
         from: root.sliderFrom
         to: 100
-        value: root.level
+        value: root.level < 0 ? root.sliderFrom : root.level
 
         onPressedChanged: root.dragging = pressed
 
