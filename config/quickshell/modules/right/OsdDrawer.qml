@@ -1,5 +1,6 @@
 import QtQuick
 import ".."
+import "../bar"
 import "../../services"
 
 Drawer {
@@ -12,12 +13,14 @@ Drawer {
             anchors.horizontalCenter: parent.horizontalCenter
             spacing: 8
 
-            Text {
+            FadeIcon {
                 anchors.horizontalCenter: parent.horizontalCenter
-                text: "󰕾"
-                color: Theme.accent
-                font.family: "JetBrains Mono Nerd Font"
-                font.pixelSize: 14
+                icon: volSlider.muted
+                    ? "󰝟"
+                    : volSlider.level < 30 ? "󰕿"
+                    : volSlider.level < 70 ? "󰖀"
+                    : "󰕾"
+                color: volSlider.muted ? Theme.muted : Theme.accent
             }
 
             VolumeSlider { id: volSlider }
@@ -42,12 +45,12 @@ Drawer {
             anchors.horizontalCenter: parent.horizontalCenter
             spacing: 8
 
-            Text {
+            FadeIcon {
                 anchors.horizontalCenter: parent.horizontalCenter
-                text: "󰃟"
+                icon: brightSlider.level < 30 ? "󰃞"
+                    : brightSlider.level < 70 ? "󰃟"
+                    : "󰃠"
                 color: Theme.accent
-                font.family: "JetBrains Mono Nerd Font"
-                font.pixelSize: 14
             }
 
             BrightnessSlider { id: brightSlider }
