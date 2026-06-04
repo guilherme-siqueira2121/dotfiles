@@ -2,29 +2,32 @@ import QtQuick
 import Quickshell.Io
 import "../../services"
 
-SystemSlider {
+Item {
     id: root
 
-    level: 50
-    getCommand: ["bash", "-c", "pamixer --get-volume 2>/dev/null || echo 50"]
-    setCommand: ["bash", "-c", "pamixer --set-volume " + String(level)]
-    pollInterval: 2000
+    implicitWidth: Theme.sliderWidth
+    implicitHeight: Theme.sliderHeight
 
-    property bool muted: false
-
-    Process {
-        id: muteProc
-        command: ["bash", "-c", "pamixer --get-mute 2>/dev/null || echo false"]
-        running: true
-        stdout: StdioCollector {
-            onStreamFinished: root.muted = text.trim() === "true"
-        }
-    }
+    property bool muted: Audio.muted
 
     Timer {
-        interval: 2000
-        running: true
-        repeat: true
-        onTriggered: muteProc.running = true
+        id: debounce
+        interval: 80
+        repeat: false
+        onTriggered: Audio.setVolume(Math.round(slider.value))
+    }
+
+    Slider {
+        id: slider
+        anchors.fill: parent
+        from: 0
+        to: 100
+        value: Audio.volume
+
+        onPressedChanged: {
+            if (!pressed) Audio.setVolume(Math.round(value))
+        }
+
+        onMoved: debounce.restart()
     }
 }
