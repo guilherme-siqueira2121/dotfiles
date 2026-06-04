@@ -15,19 +15,18 @@ Drawer {
 
             FadeIcon {
                 anchors.horizontalCenter: parent.horizontalCenter
-                icon: volSlider.muted
-                    ? "󰝟"
-                    : volSlider.level < 30 ? "󰕿"
-                    : volSlider.level < 70 ? "󰖀"
+                icon: Audio.muted ? "󰝟"
+                    : Audio.volume < 30 ? "󰕿"
+                    : Audio.volume < 70 ? "󰖀"
                     : "󰕾"
-                color: volSlider.muted ? Theme.muted : Theme.accent
+                color: Audio.muted ? Theme.muted : Theme.accent
             }
 
-            VolumeSlider { id: volSlider }
+            VolumeSlider {}
 
             Text {
                 anchors.horizontalCenter: parent.horizontalCenter
-                text: volSlider.level + "%"
+                text: Audio.volume + "%"
                 color: Theme.subtext
                 font.family: "JetBrains Mono Nerd Font"
                 font.pixelSize: 10
@@ -47,18 +46,18 @@ Drawer {
 
             FadeIcon {
                 anchors.horizontalCenter: parent.horizontalCenter
-                icon: brightSlider.level < 0 ? "󰃞"
-                    : brightSlider.level < 30 ? "󰃞"
-                    : brightSlider.level < 70 ? "󰃟"
+                icon: Brightness.level < 0 ? "󰃞"
+                    : Brightness.level < 30 ? "󰃞"
+                    : Brightness.level < 70 ? "󰃟"
                     : "󰃠"
                 color: Theme.accent
             }
 
-            BrightnessSlider { id: brightSlider }
+            BrightnessSlider {}
 
             Text {
                 anchors.horizontalCenter: parent.horizontalCenter
-                text: brightSlider.level < 0 ? "..." : brightSlider.level + "%"
+                text: Brightness.level < 0 ? "..." : Brightness.level + "%"
                 color: Theme.subtext
                 font.family: "JetBrains Mono Nerd Font"
                 font.pixelSize: 10
