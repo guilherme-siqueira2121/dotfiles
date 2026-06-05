@@ -1,6 +1,6 @@
 import QtQuick
-import ".."
-import "../bar"
+import "../../core"
+import "../../components"
 import "../../services"
 
 Drawer {
@@ -15,7 +15,7 @@ Drawer {
 
             FadeIcon {
                 anchors.horizontalCenter: parent.horizontalCenter
-                icon: Audio.muted ? "󰝟"
+                icon: Audio.muted       ? "󰝟"
                     : Audio.volume < 30 ? "󰕿"
                     : Audio.volume < 70 ? "󰖀"
                     : "󰕾"
