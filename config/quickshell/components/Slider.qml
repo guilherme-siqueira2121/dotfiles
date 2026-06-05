@@ -1,6 +1,6 @@
 import QtQuick
 import QtQuick.Controls
-import "../../services"
+import "../services"
 
 Slider {
     id: root
