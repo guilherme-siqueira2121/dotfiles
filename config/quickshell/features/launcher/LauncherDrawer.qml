@@ -1,5 +1,5 @@
 import QtQuick
-import ".."
+import "../../core"
 import "../../services"
 
 Drawer {
