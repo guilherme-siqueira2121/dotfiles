@@ -1,11 +1,12 @@
 import QtQuick
+import "../../components"
 import "../../services"
 
 BarIcon {
     Text {
         anchors.centerIn: parent
-        text: Network.state === "connected"    ? "󰤢"
-            : Network.state === "connecting"   ? "󰤟"
+        text: Network.state === "connected" ? "󰤢"
+            : Network.state === "connecting" ? "󰤟"
             : Network.state === "disconnected" ? "󰤠"
             : "󰤮"
         color: Network.state === "connected" ? Theme.accent : Theme.muted
