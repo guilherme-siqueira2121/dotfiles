@@ -1,7 +1,7 @@
 import QtQuick
 import Quickshell
 import Quickshell.Wayland
-import "bar"
+import "../features/bar"
 import "../services"
 
 PanelWindow {
@@ -36,7 +36,7 @@ PanelWindow {
         anchors.left: parent.left
         anchors.right: parent.right
         height: Theme.barBorder
-        color:  Theme.bg
+        color: Theme.bg
     }
 
     Rectangle {

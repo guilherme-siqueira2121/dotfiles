@@ -1,7 +1,8 @@
 import QtQuick
-import "top"
-import "right"
-import "bottom"
+import "../features/clock"
+import "../features/osd"
+import "../features/session"
+import "../features/launcher"
 import "../services"
 
 Item {
