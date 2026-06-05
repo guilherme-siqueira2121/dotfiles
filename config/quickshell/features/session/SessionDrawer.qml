@@ -1,6 +1,6 @@
 import QtQuick
 import Quickshell
-import ".."
+import "../../core"
 import "../../services"
 
 Drawer {
@@ -10,9 +10,9 @@ Drawer {
         spacing: 8
 
         SessionButton { icon: "󰍃"; command: ["hyprctl", "dispatch", "exit"]; requireHold: false }
-        SessionButton { icon: "󰒲"; command: ["systemctl", "suspend"];         requireHold: false }
-        SessionButton { icon: "󰜉"; command: ["systemctl", "reboot"];          requireHold: true }
-        SessionButton { icon: "󰐥"; command: ["systemctl", "poweroff"];        requireHold: true }
+        SessionButton { icon: "󰒲"; command: ["systemctl", "suspend"]; requireHold: false }
+        SessionButton { icon: "󰜉"; command: ["systemctl", "reboot"]; requireHold: true }
+        SessionButton { icon: "󰐥"; command: ["systemctl", "poweroff"]; requireHold: true }
     }
 
     component SessionButton: Rectangle {
