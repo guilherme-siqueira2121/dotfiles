@@ -1,5 +1,5 @@
 import QtQuick
-import ".."
+import "../../core"
 import "../../services"
 
 Drawer {
@@ -11,7 +11,7 @@ Drawer {
         Clock {}
 
         Rectangle {
-            width:  parent.implicitWidth
+            width: parent.implicitWidth
             height: 1
             color: Theme.border
         }
