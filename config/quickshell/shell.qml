@@ -1,6 +1,6 @@
 import QtQuick
 import Quickshell
-import "modules"
+import "core"
 
 ShellRoot {
     MainWindow {}
