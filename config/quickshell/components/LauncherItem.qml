@@ -43,7 +43,9 @@ Rectangle {
     Row {
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: parent.left
+        anchors.right: parent.right
         anchors.leftMargin: 8
+        anchors.rightMargin: 8
         spacing: 10
 
         Rectangle {
@@ -64,6 +66,7 @@ Rectangle {
 
         Column {
             anchors.verticalCenter: parent.verticalCenter
+            width: parent.width - 32 - parent.spacing - parent.anchors.leftMargin - parent.anchors.rightMargin
             spacing: 2
 
             Text {
@@ -72,6 +75,8 @@ Rectangle {
                 font.family: "JetBrains Mono Nerd Font"
                 font.pixelSize: 12
                 font.weight: Font.Medium
+                elide: Text.ElideRight
+                width: parent.width
             }
 
             Text {
@@ -81,7 +86,7 @@ Rectangle {
                 font.pixelSize: 10
                 visible: text !== ""
                 elide: Text.ElideRight
-                width: 240
+                width: parent.width
             }
         }
     }
