@@ -23,12 +23,12 @@ Slider {
             anchors.bottom: parent.bottom
             radius: 2
             color: Theme.accent
-        }
 
-        Behavior on height {
-            NumberAnimation {
-                duration: Theme.animFast
-                easing.type: Easing.OutCubic
+            Behavior on height {
+                NumberAnimation {
+                    duration: Theme.animFast
+                    easing.type: Easing.OutCubic
+                }
             }
         }
     }
@@ -42,7 +42,7 @@ Slider {
         color: root.pressed ? Theme.accent : Theme.bg
         border.color: Theme.accent
         border.width: 2
-        
+
         Behavior on color {
             ColorAnimation { duration: Theme.animFast }
         }
