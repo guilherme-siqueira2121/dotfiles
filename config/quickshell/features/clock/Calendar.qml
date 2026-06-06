@@ -12,6 +12,7 @@ Item {
     }
 
     readonly property var months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+    readonly property var weekdays: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
 
     readonly property var today: new Date(clock.date)
     readonly property int currentDay: today.getDate()
@@ -40,14 +41,15 @@ Item {
         columnSpacing: 2
 
         Repeater {
-            model: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
+            model: weekdays
             Text {
                 width: 24; height: 20
                 horizontalAlignment: Text.AlignHCenter
                 text: modelData
-                color: Theme.muted
+                color: (index === 0 || index === 6) ? Theme.accent : Theme.muted
                 font.family: "JetBrains Mono Nerd Font"
                 font.pixelSize: 9
+                font.weight: (index === 0 || index === 6) ? Font.Medium : Font.Normal
             }
         }
 
@@ -63,13 +65,19 @@ Item {
                 radius: 12
                 color: (index + 1) === currentDay ? Theme.accent : "transparent"
 
+                readonly property int weekday: (firstWeekday + index) % 7
+                readonly property bool isWeekend: weekday === 0 || weekday === 6
+                readonly property bool isToday: (index + 1) === currentDay
+
                 Text {
                     anchors.centerIn: parent
                     text: index + 1
-                    color: (index + 1) === currentDay ? Theme.bg : Theme.text
+                    color: isToday ? Theme.bg
+                        : isWeekend ? Theme.accent
+                        : Theme.text
                     font.family: "JetBrains Mono Nerd Font"
                     font.pixelSize: 10
-                    font.weight: (index + 1) === currentDay ? Font.Bold : Font.Normal
+                    font.weight: isToday ? Font.Bold : Font.Normal
                 }
             }
         }
