@@ -20,7 +20,7 @@ Item {
     }
 
     implicitWidth: 300
-    implicitHeight: Math.min(filtered.length, 6) * 52
+    implicitHeight: filtered.length > 0 ? Math.min(filtered.length, 6) * 52 : 52
 
     function launchSelected() {
         if (filtered.length > 0) launch(filtered[selectedIndex])
@@ -36,6 +36,7 @@ Item {
         model: root.filtered
         clip: true
         spacing: 2
+        visible: root.filtered.length > 0
 
         delegate: LauncherItem {
             required property var modelData
@@ -49,5 +50,14 @@ Item {
             onTapped: root.launch(modelData)
             onHovered: root.selectedIndex = index
         }
+    }
+
+    Text {
+        anchors.centerIn: parent
+        visible: root.filtered.length === 0
+        text: "No apps found"
+        color: Theme.muted
+        font.family: "JetBrains Mono Nerd Font"
+        font.pixelSize: 11
     }
 }
