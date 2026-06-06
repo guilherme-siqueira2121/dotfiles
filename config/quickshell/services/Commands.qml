@@ -45,9 +45,6 @@ Singleton {
     function query(text) {
         const q = text.trim().toLowerCase()
         if (q === "") return actions
-        return actions.filter(a =>
-            a.name.toLowerCase().includes(q) ||
-            a.comment.toLowerCase().includes(q)
-        )
+        return actions.filter(a => a.name.toLowerCase().includes(q))
     }
 }

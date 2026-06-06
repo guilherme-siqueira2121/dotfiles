@@ -15,8 +15,7 @@ Item {
         const q = query.trim().toLowerCase()
         if (q === "") return DesktopEntries.applications.values.slice(0, 6)
         return DesktopEntries.applications.values.filter(a =>
-            (a.name ?? "").toLowerCase().includes(q) ||
-            (a.comment ?? "").toLowerCase().includes(q)
+            (a.name ?? "").toLowerCase().includes(q)
         ).slice(0, 6)
     }
 
