@@ -55,6 +55,7 @@ Item {
             Component.onCompleted: {
                 delegate.opacity = 0
                 delegate.scale = 0.85
+                entryAnim.restart()
             }
 
             Connections {
