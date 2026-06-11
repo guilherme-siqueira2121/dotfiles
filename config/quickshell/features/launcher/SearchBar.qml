@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
+import "../../components"
 import "../../services"
 
 Item {
@@ -29,16 +30,10 @@ Item {
             width: parent.width - 16
             spacing: 8
 
-            Text {
-                text: root.commandMode ? "󰆍" : "󰍉"
+            FadeIcon {
+                icon: root.commandMode ? "󰆍" : "󰍉"
                 color: root.commandMode ? Theme.accent : Theme.muted
-                font.family: "JetBrains Mono Nerd Font"
-                font.pixelSize: 14
                 Layout.alignment: Qt.AlignVCenter
-
-                Behavior on color {
-                    ColorAnimation { duration: Theme.animFast }
-                }
             }
 
             TextInput {
@@ -61,24 +56,47 @@ Item {
                     color: Theme.muted
                     font: parent.font
                     visible: parent.text === ""
+
+                    Behavior on opacity {
+                        NumberAnimation { duration: Theme.animFast }
+                    }
                 }
             }
 
-            Rectangle {
-                visible: !root.commandMode
-                color: Theme.surface
-                radius: 4
+            Item {
                 implicitWidth: badge.implicitWidth + 8
                 implicitHeight: badge.implicitHeight + 4
                 Layout.alignment: Qt.AlignVCenter
+                opacity: root.commandMode ? 0 : 1
+                scale: root.commandMode ? 0.85 : 1.0
 
-                Text {
-                    id: badge
-                    anchors.centerIn: parent
-                    text: "> actions"
-                    color: Theme.muted
-                    font.family: "JetBrains Mono Nerd Font"
-                    font.pixelSize: 9
+                Behavior on opacity {
+                    NumberAnimation {
+                        duration: Theme.animFast
+                        easing.type: Easing.OutCubic
+                    }
+                }
+
+                Behavior on scale {
+                    NumberAnimation {
+                        duration: Theme.animFast
+                        easing.type: Easing.OutBack
+                    }
+                }
+
+                Rectangle {
+                    anchors.fill: parent
+                    color: Theme.surface
+                    radius: 4
+
+                    Text {
+                        id: badge
+                        anchors.centerIn: parent
+                        text: "> actions"
+                        color: Theme.muted
+                        font.family: "JetBrains Mono Nerd Font"
+                        font.pixelSize: 9
+                    }
                 }
             }
         }
