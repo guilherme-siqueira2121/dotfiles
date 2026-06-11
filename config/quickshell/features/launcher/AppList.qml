@@ -51,6 +51,48 @@ Item {
 
             onTapped: root.launch(modelData)
             onHovered: root.selectedIndex = index
+
+            Component.onCompleted: {
+                delegate.opacity = 0
+                delegate.scale = 0.85
+            }
+
+            Connections {
+                target: DrawerVisibilities
+                function onLauncherChanged() {
+                    if (DrawerVisibilities.launcher) {
+                        delegate.opacity = 0
+                        delegate.scale = 0.85
+                        entryAnim.restart()
+                    }
+                }
+            }
+
+            ParallelAnimation {
+                id: entryAnim
+
+                SequentialAnimation {
+                    PauseAnimation { duration: delegate.index * 200 }
+                    NumberAnimation {
+                        target: delegate
+                        property: "opacity"
+                        from: 0; to: 1
+                        duration: 1000
+                        easing.type: Easing.OutCubic
+                    }
+                }
+
+                SequentialAnimation {
+                    PauseAnimation { duration: delegate.index * 200 }
+                    NumberAnimation {
+                        target: delegate
+                        property: "scale"
+                        from: 0.85; to: 1.0
+                        duration: 1000
+                        easing.type: Easing.OutBack
+                    }
+                }
+            }
         }
     }
 
