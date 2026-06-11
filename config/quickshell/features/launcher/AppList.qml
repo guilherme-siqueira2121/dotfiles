@@ -36,13 +36,15 @@ Item {
         model: root.filtered
         clip: true
         spacing: 2
-        visible: root.filtered.length > 0
 
         delegate: LauncherItem {
+            id: delegate
             required property var modelData
             required property int index
 
+            width: ListView.view.width
             iconText: (modelData.name ?? "?").charAt(0).toUpperCase()
+            iconName: modelData.icon ?? ""
             name: modelData.name ?? ""
             comment: modelData.comment ?? ""
             isSelected: index === root.selectedIndex
