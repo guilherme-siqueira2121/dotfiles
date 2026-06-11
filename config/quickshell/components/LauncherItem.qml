@@ -1,4 +1,5 @@
 import QtQuick
+import Quickshell
 import "../services"
 
 Rectangle {
@@ -8,6 +9,8 @@ Rectangle {
     required property string name
     required property string comment
     required property bool isSelected
+
+    property string iconName: ""
 
     signal tapped
     signal hovered
@@ -55,12 +58,26 @@ Rectangle {
             color: Theme.surface
             anchors.verticalCenter: parent.verticalCenter
 
+            readonly property string resolvedIcon: root.iconName !== ""
+                ? Quickshell.iconPath(root.iconName, true)
+                : ""
+
+            Image {
+                anchors.fill: parent
+                anchors.margins: 4
+                source: parent.resolvedIcon
+                visible: parent.resolvedIcon !== ""
+                smooth: true
+                mipmap: true
+            }
+
             Text {
                 anchors.centerIn: parent
                 text: root.iconText
                 color: Theme.accent
                 font.family: "JetBrains Mono Nerd Font"
                 font.pixelSize: 16
+                visible: parent.resolvedIcon === ""
             }
         }
 
