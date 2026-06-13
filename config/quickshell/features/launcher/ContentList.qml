@@ -33,6 +33,11 @@ Item {
 
     onQueryChanged: selectedIndex = 0
 
+    onActionModeChanged: {
+        if (actionMode) Animations.actionModeActivated()
+        else Animations.appModeActivated()
+    }
+
     Item {
         id: list
         implicitWidth: actionMode ? actionList.implicitWidth : appList.implicitWidth
@@ -43,16 +48,8 @@ Item {
             width: root.implicitWidth
             query: root.cleanQuery
             selectedIndex: root.selectedIndex
-            visible: true
-            opacity: root.actionMode ? 0 : 1
+            visible: !root.actionMode
             onLaunched: root.launched()
-
-            Behavior on opacity {
-                NumberAnimation {
-                    duration: Theme.animFast
-                    easing.type: Easing.OutCubic
-                }
-            }
         }
 
         ActionList {
@@ -60,16 +57,8 @@ Item {
             width: root.implicitWidth
             query: root.cleanQuery
             selectedIndex: root.selectedIndex
-            visible: true
-            opacity: root.actionMode ? 1 : 0
+            visible: root.actionMode
             onLaunched: root.launched()
-
-            Behavior on opacity {
-                NumberAnimation {
-                    duration: Theme.animFast
-                    easing.type: Easing.OutCubic
-                }
-            }
         }
     }
 }
