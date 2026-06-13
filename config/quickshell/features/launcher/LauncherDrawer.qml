@@ -9,8 +9,12 @@ Drawer {
     signal launched
 
     onOpenChanged: {
-        if (open) searchBar.activate()
-        else searchBar.clear()
+        if (open) {
+            searchBar.activate()
+            Animations.launcherOpened()
+        } else {
+            searchBar.clear()
+        }
     }
 
     Column {
