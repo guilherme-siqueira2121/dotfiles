@@ -27,12 +27,13 @@ Item {
         model: root.filtered
         clip: true
         spacing: 2
-        visible: root.filtered.length > 0
 
         delegate: LauncherItem {
+            id: delegate
             required property var modelData
             required property int index
 
+            width: ListView.view.width
             iconText: modelData.icon
             name: modelData.name
             comment: modelData.comment
@@ -43,6 +44,52 @@ Item {
                 root.launched()
             }
             onHovered: root.selectedIndex = index
+
+            Component.onCompleted: {
+                delegate.opacity = 0
+                delegate.scale = 0.85
+                entryAnim.restart()
+            }
+
+            Connections {
+                target: Animations
+                function onLauncherOpened() {
+                    delegate.opacity = 0
+                    delegate.scale = 0.85
+                    entryAnim.restart()
+                }
+                function onActionModeActivated() {
+                    delegate.opacity = 0
+                    delegate.scale = 0.85
+                    entryAnim.restart()
+                }
+            }
+
+            ParallelAnimation {
+                id: entryAnim
+
+                SequentialAnimation {
+                    PauseAnimation { duration: delegate.index * 40 }
+                    NumberAnimation {
+                        target: delegate
+                        property: "opacity"
+                        from: 0; to: 1
+                        duration: Theme.animNormal
+                        easing.type: Easing.OutCubic
+                    }
+                }
+
+                SequentialAnimation {
+                    PauseAnimation { duration: delegate.index * 40 }
+                    NumberAnimation {
+                        target: delegate
+                        property: "scale"
+                        from: 0.85; to: 1.0
+                        duration: Theme.animNormal
+                        easing.type: Easing.OutBack
+                    }
+                }
+            }
         }
     }
 

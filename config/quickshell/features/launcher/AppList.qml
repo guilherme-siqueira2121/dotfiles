@@ -59,13 +59,16 @@ Item {
             }
 
             Connections {
-                target: DrawerVisibilities
-                function onLauncherChanged() {
-                    if (DrawerVisibilities.launcher) {
-                        delegate.opacity = 0
-                        delegate.scale = 0.85
-                        entryAnim.restart()
-                    }
+                target: Animations
+                function onLauncherOpened() {
+                    delegate.opacity = 0
+                    delegate.scale = 0.85
+                    entryAnim.restart()
+                }
+                function onAppModeActivated() {
+                    delegate.opacity = 0
+                    delegate.scale = 0.85
+                    entryAnim.restart()
                 }
             }
 
@@ -73,23 +76,23 @@ Item {
                 id: entryAnim
 
                 SequentialAnimation {
-                    PauseAnimation { duration: delegate.index * 200 }
+                    PauseAnimation { duration: delegate.index * 40 }
                     NumberAnimation {
                         target: delegate
                         property: "opacity"
                         from: 0; to: 1
-                        duration: 1000
+                        duration: Theme.animNormal
                         easing.type: Easing.OutCubic
                     }
                 }
 
                 SequentialAnimation {
-                    PauseAnimation { duration: delegate.index * 200 }
+                    PauseAnimation { duration: delegate.index * 40 }
                     NumberAnimation {
                         target: delegate
                         property: "scale"
                         from: 0.85; to: 1.0
-                        duration: 1000
+                        duration: Theme.animNormal
                         easing.type: Easing.OutBack
                     }
                 }
