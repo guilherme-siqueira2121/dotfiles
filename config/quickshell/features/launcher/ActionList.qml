@@ -10,7 +10,17 @@ Item {
     property string query: ""
     property int selectedIndex: 0
 
-    readonly property var filtered: Commands.query(query)
+    property var filtered: []
+
+    onQueryChanged: {
+        const next = Commands.query(query)
+        const currentNames = filtered.map(a => a.name).join(",")
+        const nextNames = next.map(a => a.name).join(",")
+        if (currentNames !== nextNames) {
+            filtered = next
+            Animations.actionModeActivated()
+        }
+    }
 
     implicitWidth: 300
     implicitHeight: filtered.length > 0 ? Math.min(filtered.length, 6) * 52 : 52
