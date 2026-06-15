@@ -12,6 +12,10 @@ Item {
 
     property var filtered: []
 
+    Component.onCompleted: {
+        filtered = Commands.query(query)
+    }
+
     onQueryChanged: {
         const next = Commands.query(query)
         const currentNames = filtered.map(a => a.name).join(",")
@@ -72,6 +76,11 @@ Item {
                     delegate.opacity = 0
                     delegate.scale = 0.85
                     entryAnim.restart()
+                }
+                function onLauncherClosed() {
+                    entryAnim.stop()
+                    delegate.opacity = 1
+                    delegate.scale = 1.0
                 }
             }
 

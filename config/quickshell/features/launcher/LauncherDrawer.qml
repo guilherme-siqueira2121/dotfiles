@@ -14,6 +14,7 @@ Drawer {
             Animations.launcherOpened()
         } else {
             searchBar.clear()
+            Animations.launcherClosed()
         }
     }
 

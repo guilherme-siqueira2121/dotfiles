@@ -70,6 +70,11 @@ Item {
                     delegate.scale = 0.85
                     entryAnim.restart()
                 }
+                function onLauncherClosed() {
+                    entryAnim.stop()
+                    delegate.opacity = 1
+                    delegate.scale = 1.0
+                }
             }
 
             ParallelAnimation {
