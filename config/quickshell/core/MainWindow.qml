@@ -14,7 +14,12 @@ PanelWindow {
 
     color: "transparent"
     WlrLayershell.exclusionMode: ExclusionMode.Ignore
-    WlrLayershell.layer: WlrLayer.Overlay
+    WlrLayershell.layer: DrawerVisibilities.clock
+    || DrawerVisibilities.osd
+    || DrawerVisibilities.session
+    || DrawerVisibilities.launcher
+    ? WlrLayer.Overlay
+    : WlrLayer.Top
 
     WlrLayershell.keyboardFocus: DrawerVisibilities.launcher
         ? WlrKeyboardFocus.OnDemand
