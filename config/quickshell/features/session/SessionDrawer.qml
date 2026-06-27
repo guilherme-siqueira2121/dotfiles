@@ -9,10 +9,10 @@ Drawer {
     Column {
         spacing: 8
 
-        SessionButton { icon: "󰍃"; command: ["hyprctl", "dispatch", "exit"]; requireHold: false }
-        SessionButton { icon: "󰒲"; command: ["systemctl", "suspend"]; requireHold: false }
-        SessionButton { icon: "󰜉"; command: ["systemctl", "reboot"]; requireHold: true }
-        SessionButton { icon: "󰐥"; command: ["systemctl", "poweroff"]; requireHold: true }
+        SessionButton { icon: "󰍃"; command: ["hyprctl", "dispatch", "exit"] }
+        SessionButton { icon: "󰒲"; command: ["systemctl", "suspend"] }
+        SessionButton { icon: "󰜉"; command: ["systemctl", "reboot"] }
+        SessionButton { icon: "󰐥"; command: ["systemctl", "poweroff"] }
     }
 
     component SessionButton: Rectangle {
@@ -20,12 +20,15 @@ Drawer {
 
         required property string icon
         required property list<string> command
-        required property bool requireHold
+
+        property bool confirming: false
 
         implicitWidth: 40
         implicitHeight: 40
         radius: Theme.radius
-        color: hover.hovered ? Theme.overlay : "transparent"
+        color: confirming ? Theme.accent
+            : hover.hovered ? Theme.overlay
+            : "transparent"
 
         Behavior on color {
             ColorAnimation { duration: Theme.animFast }
@@ -33,42 +36,31 @@ Drawer {
 
         HoverHandler { id: hover }
 
+        Timer {
+            id: confirmTimeout
+            interval: 2000
+            onTriggered: btn.confirming = false
+        }
+
         TapHandler {
-            enabled: !btn.requireHold
-            onTapped: Quickshell.execDetached(btn.command)
-        }
-
-        LongPressHandler {
-            id: longPress
-            anchors.fill: parent
-            enabled: btn.requireHold
-            duration: 800
-            onActivated: Quickshell.execDetached(btn.command)
-        }
-
-        Rectangle {
-            visible: btn.requireHold && hover.hovered
-            anchors.centerIn: parent
-            width: 36
-            height: 36
-            radius: Theme.radius
-            color: "transparent"
-
-            Rectangle {
-                anchors.bottom: parent.bottom
-                anchors.left: parent.left
-                anchors.right: parent.right
-                height: parent.height * longPress.progress
-                radius: Theme.radius
-                color: Theme.accent
-                opacity: 0.25
+            onTapped: {
+                if (btn.confirming) {
+                    confirmTimeout.stop()
+                    btn.confirming = false
+                    Quickshell.execDetached(btn.command)
+                } else {
+                    btn.confirming = true
+                    confirmTimeout.restart()
+                }
             }
         }
 
         Text {
             anchors.centerIn: parent
-            text: btn.icon
-            color: hover.hovered ? Theme.text : Theme.accent
+            text: btn.confirming ? "󰄬" : btn.icon
+            color: btn.confirming ? Theme.bg
+                : hover.hovered ? Theme.text
+                : Theme.accent
             font.family: "JetBrains Mono Nerd Font"
             font.pixelSize: 18
 
